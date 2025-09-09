@@ -1,4 +1,4 @@
-#EXTM3U billed-msg=""
+#EXTM3U billed-msg="Fred"
 #EXTINF:-1 tvg-id="" tvg-logo="https://i.imgur.com/ftwsljN.png" group-title="",A2Z
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
