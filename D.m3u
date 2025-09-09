@@ -1,0 +1,578 @@
+#EXTM3U billed-msg="Brought to you by FredTv24"
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/HORLfgn.png" group-title="LIVE TV",Kapamilya Channel HD
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363331363737343637333533323837:71347339457958556439543650426e74
+
+http://161.49.17.2:6610/001/2/ch00000090990000001286/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/rR9gMvk.png" group-title="LIVE TV",GMA
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363231383438333031323033393138:38694e34324d543478316b7455753437
+
+http://161.49.17.2:6610/001/2/ch00000090990000001093/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/Tzwxqot.png" group-title="LIVE TV",GTV
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363232353335323435353337353331:35416a68643065697575493337566135
+
+http://161.49.17.2:6610/001/2/ch00000090990000001143/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/J13vCSt.png" group-title="LIVE TV",CineMo!
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363331363735393833333531383134:4a4f75336e6e30764575624855326937
+
+http://161.49.17.2:6610/001/2/ch00000090990000001254/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/YeBcBEZ.png" group-title="LIVE TV",VivaCinema
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363230393830353534303039353831:506e354374394938446439344b6f3741
+
+http://161.49.17.2:6610/001/2/ch00000090990000001079/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/5lqlzwJ.png" group-title="LIVE TV",PBO
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363230393830323336303039323834:7676746b584436514331503256784654
+
+http://161.49.17.2:6610/001/2/ch00000090990000001078/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/bHkrJw7.png" group-title="LIVE TV",TMC
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=31363230393830373532303039383138:363354494336436b494a776f4a796634
+
+http://161.49.17.2:6610/001/2/ch00000090990000001080/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
+
+
+
+******The Chosen******
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E1 ∙ I Have Called You by Name
+https://hugh.cdn.rumble.cloud/video/fww1/6b/s8/2/i/b/G/d/ibGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=873778176-873811062
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E2 ∙ Shabbat
+https://hugh.cdn.rumble.cloud/video/fww1/3f/s8/2/a/c/G/d/acGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=624248320-624271761
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E3 ∙ Jesus Loves the Little Children
+https://hugh.cdn.rumble.cloud/video/fww1/3c/s8/2/U/c/G/d/UcGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=487642624-487660939
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E4 ∙ The Rock on Which it is Built
+https://hugh.cdn.rumble.cloud/video/fww1/1f/s8/2/G/d/G/d/GdGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=783237632-783266989
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E5 ∙ The Wedding Gift
+https://hugh.cdn.rumble.cloud/video/fww1/cd/s8/2/m/e/G/d/meGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=877313024-877345904
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E6 ∙ Indescribable Compassion
+https://hugh.cdn.rumble.cloud/video/fww1/57/s8/2/u/f/G/d/ufGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=832677376-832708646
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E7 ∙ Invitations
+https://hugh.cdn.rumble.cloud/video/fww1/6b/s8/2/Y/f/G/d/YfGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=594823680-594846016
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S1.E8 ∙ I Am He
+https://hugh.cdn.rumble.cloud/video/fww1/02/s8/2/I/h/G/d/IhGdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=944521216-944557043
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E1 ∙ Thunder
+https://hugh.cdn.rumble.cloud/video/fww1/2d/s8/2/m/9/G/d/m9Gdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1037399040-1037438000
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E2 ∙ I Saw You
+https://hugh.cdn.rumble.cloud/video/fww1/78/s8/2/u/_/G/d/u_Gdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=844024320-844056008
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E3 ∙ Matthew 4:24
+https://hugh.cdn.rumble.cloud/video/fww1/78/s8/2/I/_/G/d/I_Gdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=593323520-593345775
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E4 ∙ The Perfect Opportunity
+https://hugh.cdn.rumble.cloud/video/fww1/76/s8/2/c/c/H/d/ccHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=941675520-941710829
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E5 ∙ Spirit
+https://hugh.cdn.rumble.cloud/video/fww1/74/s8/2/E/c/H/d/EcHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=765063680-765092441
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E6 ∙ Unlawful
+https://hugh.cdn.rumble.cloud/video/fww1/3d/s8/2/M/d/H/d/MdHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=714434560-714461304
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E7 ∙ Reckoning
+https://hugh.cdn.rumble.cloud/video/fww1/d4/s8/2/a/e/H/d/aeHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=688857088-688882942
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S2.E8 ∙ Beyond Mountains
+https://hugh.cdn.rumble.cloud/video/fww1/3a/s8/2/w/g/H/d/wgHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=910245376-910279585
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E1 ∙ Homecoming
+https://hugh.cdn.rumble.cloud/video/fww1/b9/s8/2/q/h/H/d/qhHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=979363328-979400255
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E2 ∙ Two by Two
+https://hugh.cdn.rumble.cloud/video/fww1/40/s8/2/s/j/H/d/sjHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1126921728-1126964180
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E3 ∙ Physician Heal Yourself
+https://hugh.cdn.rumble.cloud/video/fww1/87/s8/2/U/j/H/d/UjHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=851187712-851219675
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E4 ∙ Clean Part 1
+https://hugh.cdn.rumble.cloud/video/fww1/c4/s8/2/y/l/H/d/ylHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=944478208-944513730
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E5 ∙ Clean Part 2
+https://hugh.cdn.rumble.cloud/video/fww1/e3/s8/2/U/m/H/d/UmHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=890355200-890388682
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E6 ∙ Intensity in Tent City
+https://hugh.cdn.rumble.cloud/video/fww1/3e/s8/2/w/o/H/d/woHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1155190784-1155234280
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E7 ∙ Ears to Hear
+https://hugh.cdn.rumble.cloud/video/fww1/fc/s8/2/c/q/H/d/cqHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1036533760-1036572831
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S3.E8 ∙ Sustenance
+https://hugh.cdn.rumble.cloud/video/fww1/80/s8/2/-/u/H/d/-uHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1594212864-1594273266
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E1 ∙ Promises
+https://1a-1791.com/video/fww1/27/s8/2/I/r/u/f/Irufz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=901270016-901303796
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E2 ∙ Confessions
+https://hugh.cdn.rumble.cloud/video/fww1/a8/s8/2/W/y/H/d/WyHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1291116032-1291164855
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E3 ∙ Moon to Blood
+https://hugh.cdn.rumble.cloud/video/fww1/bf/s8/2/m/z/H/d/mzHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=925279744-925314418
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E4 ∙ Calm Before
+https://hugh.cdn.rumble.cloud/video/fww1/c6/s8/2/E/B/H/d/EBHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1054795264-1054834970
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E5 ∙ Sitting Serving Scheming
+https://hugh.cdn.rumble.cloud/video/fww1/85/s8/2/O/C/H/d/OCHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1086942720-1086983671
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E6 ∙ Dedication
+https://hugh.cdn.rumble.cloud/video/fww1/f4/s8/2/2/E/H/d/2EHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1033977344-1034016216
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E7 ∙ The Last Sign
+https://hugh.cdn.rumble.cloud/video/fww1/0b/s8/2/I/G/H/d/IGHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1178409472-1178454036
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BNDgwOTQxMjUtYmNhZi00MGZlLWFiMmEtODNkNzVjNzZmOWY5XkEyXkFqcGc@._V1_.jpg" group-title="The Chosen",S4.E8 ∙ Humble
+https://hugh.cdn.rumble.cloud/video/fww1/d5/s8/2/w/I/H/d/wIHdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1359994880-1360046282
+
+
+****Movies****
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzA7nb-tG33uv3KzwIKRBwo5dwnRjBwpUGu5kLdKLT3H4jLJt5xm3Ku0w&s=10" group-title="Movies",Train To Busan
+https://hugh.cdn.rumble.cloud/video/fww1/2b/s8/2/k/Z/q/d/kZqdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1813773824-1813842326
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3aZA5safy7hw8ySrHorw0zbz7pCzWHpCJOwharJJUPNIWMuUbHK0QS6U&s=10" group-title="Movies",The Witch Part 2 The Other One
+https://hugh.cdn.rumble.cloud/video/fww1/2a/s8/2/2/1/q/d/21qdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=2108684800-2108764903
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQphxmel73suvKgyo2qzkqJxho1LmVeRSEhqjQ-obYVWNEvHEvBcMSliFY&s=10" group-title="Movies",The Priests
+https://hugh.cdn.rumble.cloud/video/fww1/a6/s8/2/i/3/q/d/i3qdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1661807104-1661869840
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR9soIKutBKZx4bJjL2gAtTgokJELiksWjbRBPi2DxvCYIp6eByyS6LqqsY&s=10" group-title="Movies",The Changeover
+https://hugh.cdn.rumble.cloud/video/fww1/8c/s8/2/m/i/j/d/mijdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=712961536-713015762
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmADugL1OTct4_CMAUDrEqrUThmRwRWavBZDU4TyI6WmM2ojOTrc_rEQtf&s=10" group-title="Movies",Unlocked
+https://hugh.cdn.rumble.cloud/video/fww1/49/s8/2/a/e/j/d/aejdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=739598848-739654988
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5c3dOTyPRyNl8BOK7DPk9Cg3CQwmXVLlIYXAHdx3dxQE9D01NRgJKji8&s=10" group-title="Movies",Parasite
+https://hugh.cdn.rumble.cloud/video/fww1/c0/s8/2/y/n/j/d/ynjdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=2005923328-2005999226
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYgmoaMB6gIEAyyqjuQn8uYR3duRpggg3cWIqJOdNT3RLsmyEJufwVM7E&s=10" group-title="Movies",Possessed
+https://hugh.cdn.rumble.cloud/video/fww1/f1/s8/2/u/t/j/d/utjdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1629565952-1629627537
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmDmVTVSEXkbODAMpDCyBHf2iy8BZzV8jFAUaIHtqy_Gi2h8VLyJq3K3c&s=10" group-title="Movies",The Beast
+https://hugh.cdn.rumble.cloud/video/fww1/20/s8/2/S/B/j/d/SBjdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=2010981888-2011058179
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw-xcSEIVCAlkODSy1gFksRB7qph-Xgd-ayiPmxn8XcA8vH9xLvcNn54A&s=10" group-title="Movies",Beautiful Audrey
+https://hugh.cdn.rumble.cloud/video/fww1/f0/s8/2/-/Z/j/d/-Zjdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1553231360-1553290005
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BMjAzN2U3OWEtMjBkMy00MjM2LWI3NzYtYzcwMjg3M2I1OTE4XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" group-title="Movies",Urban Justice
+https://hugh.cdn.rumble.cloud/video/fww1/2c/s8/2/q/M/D/c/qMDcz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=549877760-549919435
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR0ZhoMfqKZodPL_F5wW4yioanfYsM2gkoLEfYQZ-XKcKaffSLcA9XjrrE&s=10" group-title="Movies",Honto ni Atta Kowai Hana 2018
+https://hugh.cdn.rumble.cloud/video/fww1/ce/s8/2/C/s/g/1/Csg1y.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=749427200-749484122
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-YrCiC1EYDsYXUAI10OHCo2JUyH7dD87kUQ&usqp=CAU" group-title="Movies",Contorted
+https://hugh.cdn.rumble.cloud/video/fww1/4e/s8/2/W/L/k/d/WLkdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1453239808-1453294829
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSKWs1LOvOj5wK6XIlp7j5vuvYtlknk8QFw6-2FOYoM1gll4_iHpXO-9U0&s=10" group-title="Movies",Hansel & Gretel: Witch Hunters
+https://hugh.cdn.rumble.cloud/video/fww1/93/s8/2/I/l/h/3/Ilh3y.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=698439680-698492583
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BZGIwMzAzNDItODBmYy00MWUxLTkxMjgtODEyMzZhZDc4NjY2XkEyXkFqcGc@._V1_.jpg" group-title="Movies",Andron
+https://hugh.cdn.rumble.cloud/video/fww1/49/s8/2/G/A/p/d/GApdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=724347392-724402398
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/S/pv-target-images/4428b517737a7c9b356e228b44a4ec380b86d7b370982d13dfb67f933f3c6945.jpg" group-title="Movies",The Master Jet-Li
+https://hugh.cdn.rumble.cloud/video/fww1/04/s8/2/s/F/p/d/sFpdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=723512320-723567153
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSS6b4tupLQJUxSgp2ur-W8g29_ElYM1vteg_KYxm1tSCOaq_v1MuclFAI&s=10" group-title="Movies",Die Hexenprinzessin AKA The Witch Princess
+https://hugh.cdn.rumble.cloud/video/fww1/ee/s8/2/E/K/v/7/EKv7y.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=717402112-717456434
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BMWRmNzU0MDYtYmIyOS00NmIxLTk5NzMtYjA2NzI3OTRjM2RhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" group-title="Movies",Sadako 3D (2012)
+https://hugh.cdn.rumble.cloud/video/fww1/48/s8/2/Y/x/t/4/Yxt4y.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=764220416-764278341
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcZxLC7dMDDLgGiKmeIdYjQsdb9rXt5_EckSdO0aqOM2cu9QdEgm_h2qM0&s=10" group-title="Movies",Ringu 0: The Birthday (2000)
+https://hugh.cdn.rumble.cloud/video/fww1/d7/s8/2/w/l/Y/1/wlY1y.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1583959040-1584018998
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p83119_p_v12_ae.jpg" group-title="Movies",Dark Water (2002)
+https://hugh.cdn.rumble.cloud/video/fww1/eb/s8/2/s/X/D/1/sXD1y.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1631823872-1631885585
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReDg2Cau8SKQAyBEkuxEYElj5_FiadbjUw_HKPVrDLbTd8SbduHgVjalBg&s=10" group-title="Movies",The Cursed: Dead Man's Prey
+https://hugh.cdn.rumble.cloud/video/fww1/db/s8/2/o/L/s/d/oLsdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=841849856-841913710
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREzo9Vuwt7Tlbq4nXMKPvy7azjDsQS1Fwuc6s5zqYPdEM60HcgeqzaZDk&s=10" group-title="Movies",Hunter Killer
+https://hugh.cdn.rumble.cloud/video/fww1/41/s8/2/C/K/s/d/CKsdz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=908712960-908781961
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5LiIaX0VvYEg-1FZHf6cS9b3Za4dPJSPdnApwijYivJj_020l23H2q3g&s=10" group-title="Movies",Detective K: Secret of the Living Dead
+https://hugh.cdn.rumble.cloud/video/fww1/ff/s8/2/q/D/v/d/qDvdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1819370496-1819439707
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRhCrkDvRqZY89nQB_0h_zpTvAtzCzzZCtJntGR3GYnWJgQW18odKuTzlKXZv8ynqYCFhPddzKBLEnJIdD7-WDcYvqnVbb4BeoauYH8xw" group-title="Movies",Ditto
+https://hugh.cdn.rumble.cloud/video/fww1/26/s8/2/q/T/v/d/qTvdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1839531008-1839600641
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRlTN3y4soiy_y6zJdxHjUZ0ESbiIWkrQcgRi35mgRUgOfJpe86zRLFQ4Y9&s=10" group-title="Movies",The Immortal
+https://hugh.cdn.rumble.cloud/video/fww1/9b/s8/2/s/M/0/0/sM00y.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=995925504-996001268
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnWTOIXz-I2uBT7LPu7jDdA_H2hJAcyNhILKh9R_gSAvIkIFUJg5iLoVyg&s=10" group-title="Movies",Boyka Undisputed lV
+https://hugh.cdn.rumble.cloud/video/fww1/59/s8/2/C/T/P/d/CTPdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1452009472-1452064227
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://static.wikia.nocookie.net/moviedatabase/images/b/be/Howl.jpg/revision/latest?cb=20200408220256" group-title="Movies",Howl
+https://hugh.cdn.rumble.cloud/video/fww1/fc/s8/2/s/_/P/d/s_Pdz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1479662080-1479718171
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://m.media-amazon.com/images/M/MV5BODQ0ZDY4OTgtNTNkNy00OWM1LThmYjEtMjA0ZGE0MzBiODFhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" group-title="Movies",The Last Witness
+https://hugh.cdn.rumble.cloud/video/fww1/c1/s8/2/y/l/4/d/yl4dz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=717934592-717989084
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhEozNUobbGde79adKLzhfBpTjMTnFVrtXutiV1EbGcdf8VhQLo2rLKas&s=10" group-title="Movies",Winnie the Pooh: Blood and Honey
+https://hugh.cdn.rumble.cloud/video/fww1/cd/s8/2/S/p/4/d/Sp4dz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=631567360-631615242
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhLlVF0dmk4f9x9QzVh91Q9ZCMRbH7MAIoI56LFl2Y_PXSMZMAZeHfEvrD&s=10" group-title="Movies",Hit And Run SQuad
+https://hugh.cdn.rumble.cloud/video/fww1/39/s8/2/e/m/4/d/em4dz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1023035904-1023113565
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSU9hNexTdRn2uCKYwEZ5OM_6F5PWZ1sD8rqg&s" group-title="Movies",Monsters Dark Continent
+https://hugh.cdn.rumble.cloud/video/fww1/07/s8/2/q/9/b/e/q9bez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=925178368-925248670
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjAYpF_kzGxKP28_TMYWod732eFMPdNMveDm_hf6ARx1ZeYOonlfHerkk&s=10" group-title="Movies",Ramboo Last Blood
+https://hugh.cdn.rumble.cloud/video/fww1/71/s8/2/O/2/n/e/O2nez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=725189120-725244164
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc24ffXU0d250g05Ao6Aq8bmJdXBAFKutwnf-lWibdkb5RKeVNrPyfC84z&s=10" group-title="Movies",A Cry Within
+https://hugh.cdn.rumble.cloud/video/fww1/3a/s8/2/w/3/n/e/w3nez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=750457344-750514175
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcStqkQ0g20TXLIzQOS_IGCmGQdyzdwkczaZWgeZJ_oOUzQ3tO8K2o9XaxVm6Qmb8V-ge0dh0a8sd_QNFdbp0F9tei9ZQBQzhIvuo1-Ker8" group-title="Movies",In The Line Of Duty 4
+https://hugh.cdn.rumble.cloud/video/fww1/c5/s8/2/G/8/n/e/G8nez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=725359616-725414647
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmhc1Q-h_7sYBU-DdRegX4kZEybyTELEphpf0LQMSbC2NJzKVRrGtG8mzR&s=10" group-title="Movies",Fearless Hyena
+https://hugh.cdn.rumble.cloud/video/fww1/77/s8/2/k/8/n/e/k8nez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=776676864-776735714
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRToTCBBt_5qR78Lk6XkS3_JrFbJpo1HrTOOKIAdlek4_wBq5oAZ4jpeMs&s=10" group-title="Movies",From A House On Willow Street
+https://1a-1791.com/video/fww1/15/s8/2/4/8/C/e/48Cez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=678632448-678683948
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoB7zGYyKIe-fVCQ7RFYOzoDg88lBgivf1vYt5xUgIG2PJ43xYsOGR-_w&s=10" group-title="Movies",Acts Of Violence
+https://1a-1791.com/video/fww1/e7/s8/2/C/i/D/e/CiDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=689831936-689884243
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7rJYbcms66_VTnRw7oJW9NoE5_N6Yh2871iy3d8agUzRGWt5xW1ipUrJP&s=10" group-title="Movies",The Wailing
+https://1a-1791.com/video/fww1/4c/s8/2/K/b/D/e/KbDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1190457856-1190548515
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBiPiE2oAozy-ATkMzdov-eZ9cGdSRA3J9NQ1RZ3PXWDUKDvFMKHqwXmT9&s=10" group-title="Movies",Khali The Killer
+https://1a-1791.com/video/fww1/c7/s8/2/O/l/D/e/OlDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=684307456-684359369
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO59bbAkWhAZa7MXfa_s1rXxSQtVbzJIBALDOhnENUiVNgPdUP5YTBKm0F&s=10" group-title="Movies",Septembers Of Shiraz
+https://1a-1791.com/video/fww1/f1/s8/2/u/f/D/e/ufDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=822256128-822318500
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBLmd3knBP1VVXKHm_parJJ0NCu8Mqm0E4z3Mh7O7ahbqIKYmkUYdxyd4t&s=10" group-title="Movies",Serenity
+https://1a-1791.com/video/fww1/eb/s8/2/2/o/D/e/2oDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=778331648-778390798
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQehRr3dGwQR-_iSHBB53eBy-7hc_acPzpQF2mvJWH2JbJsGyXuOmKsQtY&s=10" group-title="Movies",Money
+https://1a-1791.com/video/fww1/fa/s8/2/w/t/D/e/wtDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=882657792-882724810
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCbSeIt1vzS5ZKACGYs8mlDHNNoVpT0nsLKzXpiIIu4zReJHgW_AQzeJg&s=10" group-title="Movies",Hitman
+https://1a-1791.com/video/fww1/12/s8/2/E/x/D/e/ExDez.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=826607616-826670392
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLI7myBIiEw2iw6ZD8MTBJMfw2jEtK_U7zMG6PcLSoWgO-8PcQd4Xk3X8&s=10" group-title="Movies",Love Untangled
+https://1a-1791.com/video/fww1/f6/s8/2/I/b/H/e/IbHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1942186496-1942260427
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiiKK2znNQ2zaUlPsVgtLkj-jy78yKrQ0Ux8VVP7Dt1ODGouqHJyVgTt0&s=10" group-title="Movies",Night Always Comes
+https://1a-1791.com/video/fww1/8c/s8/2/8/e/H/e/8eHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1764425216-1764492122
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR84TQ5EozTvNtlB8d5mcezw6ME4-vMBKicaaSyrzFmmKTEyXSG5EXJXNw&s=10" group-title="Movies",Fall For Me
+https://1a-1791.com/video/fww1/99/s8/2/-/i/H/e/-iHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1683308032-1683371897
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc-4hqUnWIrQ0zG6Vrevd3Lp_g1g8_rNyxlse0Ia1MsGlS9XYKoNN6FtM&s=10" group-title="Movies",Ziam
+https://1a-1791.com/video/fww1/0e/s8/2/-/G/H/e/-GHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1551455744-1551514621
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRooI9bxpF31rMkoqdgVOYf_0IpGvevVFirmpgaNRgAJhiYKI7NWdx8-LRb&s=10" group-title="Movies",Captain America Civil War
+https://1a-1791.com/video/fww1/dd/s8/2/c/E/H/e/cEHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=2372179456-2372269456
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjE0Gfl2zW-IxAfoPGrnOuH2heeeBKFECLS6W_pC6F_9SyN4Cl1EKeTpo&s=10" group-title="Movies",Hidden Face
+https://1a-1791.com/video/fww1/c0/s8/2/U/z/H/e/UzHez.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1682754560-1682818290
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQw2nFIiKUS8L5-VKIIUin4nfrH-e6ynzhuCaFg7D55_rh-nKzQPIkKDdib&s=10 group-title="Movies",The School
+https://drive.usercontent.google.com/download?id=1Vx9tRBfWkvjHKd1Lg38UiOH_y0_8lbUF&export=download&authuser=0&confirm=t&uuid=6c1eb5eb-a0cd-421f-b93c-702eaac4dcff&at=AN8xHopus-gvgUubn6L2P5V2SKbh%3A1756837053930
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTIjDjAZlW3luSK8Z0DDiDMTssY6b7jBjYyYbvLjYhVqzfeeYLE39ZW7JM6&s=10" group-title="Movies",School Tales
+https://drive.usercontent.google.com/download?id=1fOyaz_s7qGTAZjFyOoeDvxiBsOQDLC1r&export=download&authuser=0&confirm=t&uuid=6c1eb5eb-a0cd-421f-b93c-702eaac4dcff&at=AN8xHopus-gvgUubn6L2P5V2SKbh%3A1756837053930
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMrcytUZqDYeI6HH2r8wRjQh55ztXPcimw6zN67K8aYsvLCXl3HJILKzrU&s=10" group-title="Movies",The Row
+https://drive.usercontent.google.com/download?id=1l8MrJiSFcy-9ibdpHKAhJXI3K--oZXcA&export=download&authuser=0&confirm=t&uuid=6c1eb5eb-a0cd-421f-b93c-702eaac4dcff&at=AN8xHopus-gvgUubn6L2P5V2SKbh%3A1756837053930
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxvNY3tLPUjuAUkHtkGNWWuh4jL63Q5WY5uHT50SVLUljohKxLEpSV9F0e&s=10" group-title="Movies",Before I Wake
+https://1a-1791.com/video/fww1/d0/s8/2/a/E/l/f/aElfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=764663808-764721837
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJVqiwYljws2G2N4X5jptGRo-vecHggNC6DgGIA9TZGgSFyElVz_owq3k&s=10" group-title="Movies",Stockholm
+https://1a-1791.com/video/fww1/22/s8/2/-/F/l/f/-Flfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=692742656-692795180
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ66SbugNoSSX0dlZgaL7wBTBoLSHx-ohiCP83gq_Y3dC0KIGaWWyD6FuE&s=10" group-title="Movies",Dragged Across Concrete
+https://1a-1791.com/video/fww1/63/s8/2/0/I/l/f/0Ilfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1113967616-1114052240
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfkw_t8b874quCs7J_yBc1bFT9YwOMepQR3RxR7YEyxuXv8rOeW_CRoSQ&s=10" group-title="Movies",The Bleeder
+https://1a-1791.com/video/fww1/c0/s8/2/4/O/l/f/4Olfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=738684928-738740958
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBP3UK0pM_57C85FwQeNlcJshwBf2YOEi9BJOcHknTohdIJBdgSHPhRe6H&s=10" group-title="Movies",Extreme Job
+https://1a-1791.com/video/fww1/99/s8/2/a/L/l/f/aLlfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=853664256-853729041
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScAxBZikmuqHh9atIh7lAkMSOvheHaUVFMlgFy2JclG7hFp0Q1mFjVPlS9&s=10" group-title="Movies",Killing Them Softly
+https://1a-1791.com/video/fww1/a1/s8/2/i/N/l/f/iNlfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=727069184-727124303
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtf5mSDV1pzkw_tIMxrwtIbjn83poA91vqyqG0CmQo_J30mh3XqiZzT30&s=10" group-title="Movies",The Closet
+https://1a-1791.com/video/fww1/92/s8/2/2/Z/G/f/2ZGfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=755342336-755399666
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcThKrA1RiVhIST9VuAJTmJcyc4Ik1iRymzKTqW060_qDdPyjsnNs3McQ2o&s=10" group-title="Movies",The Boy
+https://1a-1791.com/video/fww1/73/s8/2/w/E/Y/f/wEYfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=737816576-737872528
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTxMv76CAoidyaHYdLHA8-DmnbZK2DdaJ5v4Xc0z9GJWXNUxDtMRePOm4&s=10" group-title="Movies",Kruel
+https://1a-1791.com/video/fww1/43/s8/2/u/I/Y/f/uIYfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=816148480-816210419
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgphTnVwP-VqrvVMv-CDmvIksKcuHePiMwc9MEfunQKKUbbptsE6_e6FY&s=10" group-title="Movies",Ghosts Of War
+https://1a-1791.com/video/fww1/f1/s8/2/Y/p/Z/f/YpZfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=678849024-678900438
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwIMMLIWcFVCQxvP2twtxeNpefSRmiGEN73p9Wevy0kbBC-TaQ7lzohBiq&s=10" group-title="Movies",Eliminators
+https://1a-1791.com/video/fww1/d7/s8/2/C/M/Y/f/CMYfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=749701120-749757953
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNLd-KJBblMXL-ozSlvXWByLU5OxCreL-msrSVpPDlZ0nEdcwQKRjGoN4&s=10" group-title="Movies",Search And Destroy
+https://1a-1791.com/video/fww1/6d/s8/2/W/Q/Y/f/WQYfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=651728896-651778510
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQU-0Z_22m4dNDqGuFbgmSYpyBj9BlXbq9EYU-QoaVIru2hfDI7s80ZR8ag&s=10" group-title="Movies",Skiptrace
+https://1a-1791.com/video/fww1/b8/s8/2/q/V/Y/f/qVYfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=835660288-835723649
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1TVZmebj5Xhjkn-s4hxt_9dvvXy0kOxgNBJRmzCudfVbpW6sVyRGEgEVk&s=10" group-title="Movies",Take Point
+https://1a-1791.com/video/fww1/6e/s8/2/g/0/Y/f/g0Yfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=953048576-953120798
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJbwWiP1DlTJ9F5wSrktW0ekEWynO-8m4qgWkENq5j9Ddliql_LyW4WXU&s=10" group-title="Movies",Chinese Zodiac 2012
+https://1a-1791.com/video/fww1/5c/s8/2/q/4/Y/f/q4Yfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=933161984-933232701
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToW_hnAFjI9DVcX4WTT8ekC2vRhfBT4u2I6L9hrP7377xPjtWu3z4RP_w&s=10" group-title="Movies",Citizen Of A Kind
+https://1a-1791.com/video/fww1/3c/s8/2/s/8/Y/f/s8Yfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=875379200-875445587
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSKjQmo7ZiKLwIzP9ycqjpIeewImGDqm2M7j8zokf_tcb77Ut-MjykQQU&s=10" group-title="Movies",Iron Monkey
+https://1a-1791.com/video/fww1/99/s8/2/6/_/Y/f/6_Yfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=715537408-715591640
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVm_wuLJ5-xlS6u3E4PWEnu37U9pr9y2-7_O8lApt7cOFBXXGmE8yvbTM&s=10" group-title="Movies",Sadako 3D 2012
+https://1a-1791.com/video/fww1/da/s8/2/k/4/9/f/k49fz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=781632512-781691874
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpNIjD__J_WPD01jjzaduIF_0XCyUaQ-reZ46yhi_zNYR7LNLyZXtLq-sY&s=10" group-title="Movies",Broken City
+https://1a-1791.com/video/fww1/81/s8/2/s/5/9/f/s59fz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=857931776-857996943
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIEJmVp9pi7DM99Z-rqpIXy39f_WiqrRApAFCYOQZOwY-qLmdq7yKGU-ni&s=10" group-title="Movies",Tully
+https://1a-1791.com/video/fww1/68/s8/2/K/6/9/f/K69fz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=718646784-718701317
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+
+
