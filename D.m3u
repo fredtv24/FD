@@ -1,6 +1,8 @@
 #EXTM3U billed-msg="Brought to you by FredTv24"
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/HORLfgn.png" group-title="LIVE TV",Kapamilya Channel HD
+url-tvg="https://epgshare01.online/epgshare01/epg_ripper_PH1.xml.gz,https://epgshare01.online/epgshare01/epg_ripper_PH2.xml.gz,https://epgshare01.online/epgshare01/epg_ripper_US1.xml.gz"
+
+#EXTINF:-1 tvg-id="Kapamilya.Channel.ph" tvg-logo="https://i.imgur.com/HORLfgn.png" group-title="LIVE TV",Kapamilya Channel HD
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -8,7 +10,7 @@
 
 http://161.49.17.2:6610/001/2/ch00000090990000001286/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/rR9gMvk.png" group-title="LIVE TV",GMA
+#EXTINF:-1 tvg-id="GMA.ph" tvg-logo="https://i.imgur.com/rR9gMvk.png" group-title="LIVE TV",GMA
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -16,7 +18,15 @@ http://161.49.17.2:6610/001/2/ch00000090990000001286/manifest.mpd?JITPDRMType=Wi
 
 http://161.49.17.2:6610/001/2/ch00000090990000001093/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/Tzwxqot.png" group-title="LIVE TV",GTV
+#EXTINF:-1 tvg-id="TV5.ph" tvg-logo="https://i.imgur.com/U5L67WD.png" group-title="LIVE TV",TV5
+
+#KODIPROP:inputstream.adaptive.license_type=clearkey
+
+#KODIPROP:inputstream.adaptive.license_key=2615129ef2c846a9bbd43a641c7303ef:07c7f996b1734ea288641a68e1cfdc4d
+
+https://qp-pldt-live-grp-02-prod.akamaized.net/out/u/tv5_hd.mpd
+
+#EXTINF:-1 tvg-id="GTV.ph" tvg-logo="https://i.imgur.com/Tzwxqot.png" group-title="LIVE TV",GTV
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -24,7 +34,7 @@ http://161.49.17.2:6610/001/2/ch00000090990000001093/manifest.mpd?JITPDRMType=Wi
 
 http://161.49.17.2:6610/001/2/ch00000090990000001143/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/J13vCSt.png" group-title="LIVE TV",CineMo!
+#EXTINF:-1 tvg-id="CINEMO!.ph" tvg-logo="https://i.imgur.com/J13vCSt.png" group-title="LIVE TV",CineMo!
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -32,7 +42,7 @@ http://161.49.17.2:6610/001/2/ch00000090990000001143/manifest.mpd?JITPDRMType=Wi
 
 http://161.49.17.2:6610/001/2/ch00000090990000001254/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/YeBcBEZ.png" group-title="LIVE TV",VivaCinema
+#EXTINF:-1 tvg-id="VIVA.Cinema.ph" tvg-logo="https://i.imgur.com/YeBcBEZ.png" group-title="LIVE TV",VivaCinema
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -40,7 +50,7 @@ http://161.49.17.2:6610/001/2/ch00000090990000001254/manifest.mpd?JITPDRMType=Wi
 
 http://161.49.17.2:6610/001/2/ch00000090990000001079/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/5lqlzwJ.png" group-title="LIVE TV",PBO
+#EXTINF:-1 tvg-id="PBO.ph" tvg-logo="https://i.imgur.com/5lqlzwJ.png" group-title="LIVE TV",PBO
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -48,7 +58,7 @@ http://161.49.17.2:6610/001/2/ch00000090990000001079/manifest.mpd?JITPDRMType=Wi
 
 http://161.49.17.2:6610/001/2/ch00000090990000001078/manifest.mpd?JITPDRMType=Widevine&virtualDomain=001.live_hls.zte.com
 
-#EXTINF:-1 tvg-id="LIVE TV" tvg-logo="https://i.imgur.com/bHkrJw7.png" group-title="LIVE TV",TMC
+#EXTINF:-1 tvg-id="Tagalized.Movie.Channel.ph" tvg-logo="https://i.imgur.com/bHkrJw7.png" group-title="LIVE TV",TMC
 
 #KODIPROP:inputstream.adaptive.license_type=clearkey
 
@@ -313,6 +323,7 @@ https://drive.usercontent.google.com/download?id=1l8MrJiSFcy-9ibdpHKAhJXI3K--oZX
 
 #EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxvNY3tLPUjuAUkHtkGNWWuh4jL63Q5WY5uHT50SVLUljohKxLEpSV9F0e&s=10" group-title="Movies",Before I Wake
 https://1a-1791.com/video/fww1/d0/s8/2/a/E/l/f/aElfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=764663808-764721837
+https://1a-1791.com/video/fww1/93/s8/2/4/d/5/g/4d5gz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1554714112-1554772965
 
 #EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJVqiwYljws2G2N4X5jptGRo-vecHggNC6DgGIA9TZGgSFyElVz_owq3k&s=10" group-title="Movies",Stockholm
 https://1a-1791.com/video/fww1/22/s8/2/-/F/l/f/-Flfz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=692742656-692795180
@@ -371,19 +382,22 @@ https://1a-1791.com/video/fww1/81/s8/2/s/5/9/f/s59fz.caa.tar?r_file=chunklist.m3
 #EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIEJmVp9pi7DM99Z-rqpIXy39f_WiqrRApAFCYOQZOwY-qLmdq7yKGU-ni&s=10" group-title="Movies",Tully
 https://1a-1791.com/video/fww1/68/s8/2/K/6/9/f/K69fz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=718646784-718701317
 
-#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTULYjBNc_c88YQIH9AMFdRIZklsjySwk0m93_L0YoZsdQmLKKl8ZrQx06K&s=10" group-title="Movies",The Fear Of Darkness
+https://1a-1791.com/video/fww1/4f/s8/2/s/K/H/g/sKHgz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=690738688-690791059
 
+https://1a-1791.com/video/fww1/d5/s8/2/s/y/O/g/syOgz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1471687168-1471742814
 
-#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRMvamQMmcGXSjmQpjVeBTnoheBFBaHT7Qnkkc8NUawWaHpPaF8Re6l0xax&s=10" group-title="Movies",Nigth Of The Undead
+https://1a-1791.com/video/fww1/10/s8/2/e/L/H/g/eLHgz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=808657920-808719578
 
-#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJddGJ8dqWEFqDAvpmCr7sm22xBE1cwP_bfwttnlhHYxgp76FanYbrfKc&s=10" group-title="Movies",The Last Full Measure
+https://1a-1791.com/video/fww1/96/s8/2/c/N/H/g/cNHgz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=896201728-896269998
 
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj_cMYCFeugNQftQbx9bxNpDIR5SZ7yQ1gIsQwgCWL03LAJq-0uDPGRBc&s=10" group-title="Movies",House Of The Dissappered
+https://1a-1791.com/video/fww1/2f/s8/2/2/U/1/g/2U1gz.gaa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=1606144512-1606205227
 
-#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
-
-
-#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
-
+#EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgN3ID_IRYR2KK64gJBPNi17W_VydYxOz8zHygJgC-VAuwVtRE1i4U-14&s=10" group-title="Movies",Urban Myths
+https://1a-1791.com/video/fww1/38/s8/2/i/F/8/g/iF8gz.caa.tar?r_file=chunklist.m3u8&r_type=application%2Fvnd.apple.mpegurl&r_range=943375360-943446966
 
 #EXTINF:-1 tvg-id="kapcha1" tvg-logo="https://i.imgur.com/0xo8Ivs.png" group-title="Movies",
 
