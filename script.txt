@@ -1,0 +1,724 @@
+-- =============================================================
+-- MomoHub - All-in-One Auto Farm Script (X2ZU UI Edition)
+-- =============================================================
+
+local HttpService = game:GetService("HttpService")
+local Players = game:GetService("Players")
+local VirtualUser = game:GetService("VirtualUser")
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Workspace = game:GetService("Workspace")
+local RunService = game:GetService("RunService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local remotes = ReplicatedStorage:WaitForChild("Remotes")
+
+-- Remotes
+local trainRemote = remotes:WaitForChild("TrainSpear")
+local stopTrainRemote = remotes:WaitForChild("StopTrain")
+local rebirthRemote = remotes:WaitForChild("Rebirth")
+local buyEggRemote = remotes:WaitForChild("BuyEgg")
+local buySpearRemote = remotes:WaitForChild("BuySpear")
+local throwRemote = remotes:WaitForChild("Throw")
+local spinRemote = remotes:WaitForChild("Spin")
+local claimDailyRemote = remotes:WaitForChild("ClaimDaily")
+local claimGiftRemote = remotes:WaitForChild("ClaimGift")
+local claimQuestEggRemote = remotes:WaitForChild("ClaimQuestEgg")
+local usePotionRemote = remotes:WaitForChild("UsePotion")
+
+-- ดึงข้อมูลโซนและไข่ (เพิ่มโซน Space เรียบร้อย)
+local zones = {"City", "Carnival", "Beach", "Candy", "Space"}
+local eggList = {}
+pcall(function()
+    for _, egg in pairs(Workspace.Eggs:GetChildren()) do table.insert(eggList, egg.Name) end
+    table.sort(eggList)
+end)
+if #eggList == 0 then table.insert(eggList, "Basic Egg") end
+
+-- ==========================================
+-- ลอจิกจัดการ Config (Save / Load)
+-- ==========================================
+local ConfigFolder = "MoMoHub_Data"
+local ConfigFile = ConfigFolder .. "/Settings.json"
+
+local DefaultConfig = {
+    -- Player Settings
+    WalkSpeed = 16,
+    JumpPower = 50,
+    AntiAFK = false,
+    AutoSave = false,
+    AutoLoad = false,
+    BlackScreen = false, 
+    -- Farm Settings
+    AutoTrain = false,
+    TrainZone = zones[1],
+    TrainDuration = 10,
+    AutoThrow = false,
+    ThrowZone = zones[1],
+    AutoRebirth = false,
+    -- Potion Settings
+    AutoPotion_Cash = false,
+    AutoPotion_Power = false,
+    AutoPotion_Luck = false,
+    -- Shop & Misc
+    AutoEgg = false,
+    SelectedEgg = eggList[1],
+    AutoSpear = false,
+    AutoSpin = false,
+    AutoClaimDaily = false,
+    AutoClaimGift = false,
+    AutoClaimQuest = false
+}
+
+local MoMoConfig = {}
+
+if isfolder and not isfolder(ConfigFolder) then
+    makefolder(ConfigFolder)
+end
+
+local function LoadConfig()
+    if isfile and isfile(ConfigFile) then
+        local success, decoded = pcall(function()
+            return HttpService:JSONDecode(readfile(ConfigFile))
+        end)
+        if success and type(decoded) == "table" then
+            for k, v in pairs(DefaultConfig) do
+                if decoded[k] == nil then decoded[k] = v end
+            end
+            return decoded
+        end
+    end
+    return DefaultConfig
+end
+
+local SavedData = LoadConfig()
+
+if SavedData.AutoLoad then
+    MoMoConfig = SavedData
+else
+    MoMoConfig = DefaultConfig
+    MoMoConfig.AutoLoad = SavedData.AutoLoad
+    MoMoConfig.AutoSave = SavedData.AutoSave
+end
+
+local function SaveConfig()
+    if writefile then
+        local success, encoded = pcall(function()
+            return HttpService:JSONEncode(MoMoConfig)
+        end)
+        if success then
+            writefile(ConfigFile, encoded)
+        end
+    end
+end
+
+local function CheckAndSave()
+    if MoMoConfig.AutoSave then SaveConfig() end
+end
+
+-- ==========================================
+-- ระบบ Black Screen Boost FPS (อัปเดตใหม่ ให้เห็น UI)
+-- ==========================================
+local CoreGui = game:GetService("CoreGui")
+local BlackScreenGui = Instance.new("ScreenGui")
+BlackScreenGui.Name = "MoMoBlackScreen"
+BlackScreenGui.IgnoreGuiInset = true 
+BlackScreenGui.DisplayOrder = -9999 -- ปรับให้ติดลบ เพื่อให้จอดำอยู่หลัง UI ทุกอย่างในเกม
+local bsSuccess, _ = pcall(function() BlackScreenGui.Parent = CoreGui end)
+if not bsSuccess then BlackScreenGui.Parent = player:WaitForChild("PlayerGui") end
+
+local BlackFrame = Instance.new("Frame")
+BlackFrame.Size = UDim2.new(1, 0, 1, 0)
+BlackFrame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+BlackFrame.BorderSizePixel = 0
+BlackFrame.Parent = BlackScreenGui
+
+BlackScreenGui.Enabled = MoMoConfig.BlackScreen
+
+local function ToggleBlackScreen(state)
+    BlackScreenGui.Enabled = state
+    pcall(function()
+        if state then
+            RunService:Set3dRenderingEnabled(false)
+        else
+            RunService:Set3dRenderingEnabled(true)
+        end
+    end)
+end
+
+-- ==========================================
+-- ระบบกวาดล้างการแจ้งเตือน
+-- ==========================================
+local function clearSpecificNotifs()
+    pcall(function()
+        local notifsPath = playerGui:FindFirstChild("MainUI") and playerGui.MainUI:FindFirstChild("Notifs")
+        if notifsPath then notifsPath:ClearAllChildren() end
+    end)
+end
+clearSpecificNotifs()
+
+local function handleNotifs(UI)
+    pcall(function()
+        if UI:IsA("TextLabel") or UI:IsA("TextBox") then
+            local text = string.lower(UI.Text)
+            if string.find(text, "don't have enough") or string.find(text, "not enough") then
+                local current = UI
+                for i = 1, 3 do
+                    if current.Parent and (current.Parent:IsA("Frame") or current.Parent:IsA("ImageLabel") or current.Parent:IsA("CanvasGroup")) then
+                        current = current.Parent
+                    else break end
+                end
+                current:Destroy()
+            end
+        end
+        if UI.Parent and UI.Parent.Name == "Notifs" then
+            task.wait(0.05)
+            UI:Destroy()
+        end
+    end)
+end
+playerGui.DescendantAdded:Connect(handleNotifs)
+
+-- ==========================================
+-- ฟังก์ชันหาเป้าหมายการฝึกที่ดีที่สุด
+-- ==========================================
+local function getBestTarget()
+    local leaderstats = player:FindFirstChild("leaderstats")
+    if not leaderstats or not leaderstats:FindFirstChild("Power") then return nil end
+    local currentPower = leaderstats.Power.Value
+    local bestName, highestReq = nil, -1
+    
+    for _, target in pairs(Workspace.Targets:GetChildren()) do
+        local req = target:GetAttribute("Required")
+        local zone = target:GetAttribute("Zone")
+        if req and type(req) == "number" and zone == MoMoConfig.TrainZone then
+            if currentPower >= req and req > highestReq then
+                highestReq = req
+                bestName = target.Name
+            end
+        end
+    end
+    return bestName
+end
+
+-- ==========================================
+-- เริ่มโหลด UI (X2ZU)
+-- ==========================================
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/x2zu/OPEN-SOURCE-UI-ROBLOX/refs/heads/main/X2ZU%20UI%20ROBLOX%20OPEN%20SOURCE/DummyUi-leak-by-x2zu/fetching-main/Tools/Framework.luau"))()
+
+local Window = Library:Window({
+    Title = "MoMoHub",
+    Desc = "v1.0 - SpearTraining",
+    Icon = "badge-check",
+    Theme = "Amethyst",
+    Color = Color3.fromRGB(170, 0, 255),
+    Config = {
+        Keybind = Enum.KeyCode.LeftControl,
+        Size = UDim2.new(0, 500, 0, 450) 
+    },
+    CloseUIButton = { Enabled = false, Text = "" }
+})
+
+local SidebarLine = Instance.new("Frame")
+SidebarLine.Size = UDim2.new(0, 2, 1, 0)
+SidebarLine.Position = UDim2.new(0, 140, 0, 0)
+SidebarLine.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
+SidebarLine.BorderSizePixel = 0
+SidebarLine.ZIndex = 5
+SidebarLine.Name = "SidebarLine"
+SidebarLine.Parent = CoreGui 
+
+local Glow = Instance.new("UIStroke")
+Glow.Color = Color3.fromRGB(138, 43, 226)
+Glow.Thickness = 1
+Glow.Transparency = 0.2
+Glow.Parent = SidebarLine
+
+-- ==========================================
+-- Tab 1: Main Farm
+-- ==========================================
+local MainTab = Window:Tab({Title = "Main Farm", Icon = "home"}) do
+    MainTab:Section({Title = "Auto Train System"})
+    
+    MainTab:Dropdown({
+        Title = "Select Train Zone",
+        List = zones, 
+        Value = MoMoConfig.TrainZone,
+        Callback = function(Value)
+            MoMoConfig.TrainZone = Value
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Slider({
+        Title = "Train Duration (Seconds)",
+        Min = 1,
+        Max = 60,
+        Rounding = 0,
+        Value = MoMoConfig.TrainDuration,
+        Callback = function(Value)
+            MoMoConfig.TrainDuration = Value
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Toggle({
+        Title = "Auto Train Spear",
+        Desc = "Start training automatically",
+        Value = MoMoConfig.AutoTrain,
+        Callback = function(State)
+            MoMoConfig.AutoTrain = State
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Section({Title = "Throwing System"})
+    
+    MainTab:Dropdown({
+        Title = "Select Throw Zone",
+        List = zones, 
+        Value = MoMoConfig.ThrowZone,
+        Callback = function(Value)
+            MoMoConfig.ThrowZone = Value
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Toggle({
+        Title = "Auto Throw",
+        Desc = "Start throwing automatically",
+        Value = MoMoConfig.AutoThrow,
+        Callback = function(State)
+            MoMoConfig.AutoThrow = State
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Section({Title = "Auto Rebirth System"})
+    
+    MainTab:Toggle({
+        Title = "Auto Rebirth (1s)",
+        Value = MoMoConfig.AutoRebirth,
+        Callback = function(State)
+            MoMoConfig.AutoRebirth = State
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Section({Title = "Auto Potion System"})
+
+    MainTab:Toggle({
+        Title = "Auto Cash Potion",
+        Value = MoMoConfig.AutoPotion_Cash,
+        Callback = function(State)
+            MoMoConfig.AutoPotion_Cash = State
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Toggle({
+        Title = "Auto Power Potion",
+        Value = MoMoConfig.AutoPotion_Power,
+        Callback = function(State)
+            MoMoConfig.AutoPotion_Power = State
+            CheckAndSave()
+        end
+    })
+
+    MainTab:Toggle({
+        Title = "Auto Luck Potion",
+        Value = MoMoConfig.AutoPotion_Luck,
+        Callback = function(State)
+            MoMoConfig.AutoPotion_Luck = State
+            CheckAndSave()
+        end
+    })
+end
+Window:Line()
+
+-- ==========================================
+-- Tab 2: Shop
+-- ==========================================
+local ShopTab = Window:Tab({Title = "Shop", Icon = "shopping-cart"}) do
+    ShopTab:Section({Title = "Egg Purchase System"})
+
+    ShopTab:Dropdown({
+        Title = "Select Egg",
+        List = eggList, 
+        Value = MoMoConfig.SelectedEgg,
+        Callback = function(Value)
+            MoMoConfig.SelectedEgg = Value
+            CheckAndSave()
+        end
+    })
+
+    ShopTab:Toggle({
+        Title = "Auto Buy Egg",
+        Value = MoMoConfig.AutoEgg,
+        Callback = function(State)
+            MoMoConfig.AutoEgg = State
+            CheckAndSave()
+        end
+    })
+
+    ShopTab:Section({Title = "Spear Purchase System"})
+
+    ShopTab:Toggle({
+        Title = "Auto Buy Spear (Cash)",
+        Value = MoMoConfig.AutoSpear,
+        Callback = function(State)
+            MoMoConfig.AutoSpear = State
+            CheckAndSave()
+        end
+    })
+end
+Window:Line()
+
+-- ==========================================
+-- Tab 3: Misc
+-- ==========================================
+local MiscTab = Window:Tab({Title = "Misc", Icon = "component"}) do
+    MiscTab:Section({Title = "Rewards & Systems"})
+
+    MiscTab:Toggle({
+        Title = "Auto Spin",
+        Value = MoMoConfig.AutoSpin,
+        Callback = function(State)
+            MoMoConfig.AutoSpin = State
+            CheckAndSave()
+        end
+    })
+
+    MiscTab:Toggle({
+        Title = "Auto Claim Daily",
+        Desc = "Claims Day 1-30 automatically",
+        Value = MoMoConfig.AutoClaimDaily,
+        Callback = function(State)
+            MoMoConfig.AutoClaimDaily = State
+            CheckAndSave()
+        end
+    })
+
+    MiscTab:Toggle({
+        Title = "Auto Claim Gifts",
+        Desc = "Claims Playtime Gifts 1-12",
+        Value = MoMoConfig.AutoClaimGift,
+        Callback = function(State)
+            MoMoConfig.AutoClaimGift = State
+            CheckAndSave()
+        end
+    })
+
+    MiscTab:Toggle({
+        Title = "Auto Claim Quest",
+        Value = MoMoConfig.AutoClaimQuest,
+        Callback = function(State)
+            MoMoConfig.AutoClaimQuest = State
+            CheckAndSave()
+        end
+    })
+end
+Window:Line()
+
+-- ==========================================
+-- Tab 4: Player
+-- ==========================================
+local PlayerTab = Window:Tab({Title = "Player", Icon = "user"}) do
+    PlayerTab:Section({Title = "Local Player Settings"})
+
+    PlayerTab:Slider({
+        Title = "WalkSpeed",
+        Min = 16,
+        Max = 250,
+        Rounding = 0,
+        Value = MoMoConfig.WalkSpeed,
+        Callback = function(speed)
+            MoMoConfig.WalkSpeed = speed
+            CheckAndSave()
+            if Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+                Players.LocalPlayer.Character.Humanoid.WalkSpeed = speed
+            end
+        end
+    })
+
+    PlayerTab:Slider({
+        Title = "JumpPower",
+        Min = 50,
+        Max = 300,
+        Rounding = 0,
+        Value = MoMoConfig.JumpPower,
+        Callback = function(power)
+            MoMoConfig.JumpPower = power
+            CheckAndSave()
+            if Players.LocalPlayer.Character and Players.LocalPlayer.Character:FindFirstChild("Humanoid") then
+                Players.LocalPlayer.Character.Humanoid.JumpPower = power
+            end
+        end
+    })
+end
+Window:Line()
+
+-- ==========================================
+-- Tab 5: Settings
+-- ==========================================
+local SettingsTab = Window:Tab({Title = "Settings", Icon = "wrench"}) do
+    SettingsTab:Section({Title = "Community"})
+
+    SettingsTab:Button({
+        Title = "Join Discord",
+        Desc = "discord.gg/k2wdyy8QMN",
+        Callback = function()
+            if setclipboard then
+                setclipboard("https://discord.gg/k2wdyy8QMN")
+                Window:Notify({Title = "MoMoHub", Desc = "Discord link copied!", Time = 3})
+            end
+        end
+    })
+
+    SettingsTab:Section({Title = "Performance"})
+
+    SettingsTab:Toggle({
+        Title = "Black Screen (Boost FPS)",
+        Desc = "Hides the game world to save GPU usage",
+        Value = MoMoConfig.BlackScreen,
+        Callback = function(State)
+            MoMoConfig.BlackScreen = State
+            CheckAndSave()
+            ToggleBlackScreen(State)
+        end
+    })
+
+    SettingsTab:Section({Title = "General Settings"})
+
+    local AntiAfkConnection
+    SettingsTab:Toggle({
+        Title = "Anti-AFK",
+        Desc = "Prevent getting kicked for inactivity",
+        Value = MoMoConfig.AntiAFK,
+        Callback = function(State)
+            MoMoConfig.AntiAFK = State
+            CheckAndSave()
+            
+            local player = Players.LocalPlayer
+            if State then
+                AntiAfkConnection = player.Idled:Connect(function()
+                    VirtualUser:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                    task.wait(1)
+                    VirtualUser:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+                end)
+            else
+                if AntiAfkConnection then
+                    AntiAfkConnection:Disconnect()
+                    AntiAfkConnection = nil
+                end
+            end
+        end
+    })
+
+    SettingsTab:Section({Title = "Config System"})
+
+    SettingsTab:Toggle({
+        Title = "Auto Save Config",
+        Desc = "Automatically save settings when changed",
+        Value = MoMoConfig.AutoSave,
+        Callback = function(State)
+            MoMoConfig.AutoSave = State
+            if State then
+                SaveConfig() 
+                Window:Notify({Title = "Config", Desc = "Auto Save Enabled", Time = 3})
+            else
+                SaveConfig() 
+                Window:Notify({Title = "Config", Desc = "Auto Save Disabled", Time = 3})
+            end
+        end
+    })
+
+    SettingsTab:Toggle({
+        Title = "Auto Load Config",
+        Desc = "Load settings automatically on inject",
+        Value = MoMoConfig.AutoLoad,
+        Callback = function(State)
+            MoMoConfig.AutoLoad = State
+            SaveConfig() 
+            if State then
+                Window:Notify({Title = "Config", Desc = "Auto Load Enabled", Time = 3})
+            else
+                Window:Notify({Title = "Config", Desc = "Auto Load Disabled", Time = 3})
+            end
+        end
+    })
+end
+
+-- ==========================================
+-- ระบบ Floating Toggle Button
+-- ==========================================
+do
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "HubMobileToggle"
+    ScreenGui.ResetOnSpawn = false
+    local success, _ = pcall(function() ScreenGui.Parent = CoreGui end)
+    if not success then ScreenGui.Parent = player:WaitForChild("PlayerGui") end
+
+    local ToggleBtn = Instance.new("ImageButton")
+    ToggleBtn.Name = "ToggleBtn"
+    ToggleBtn.Parent = ScreenGui
+    ToggleBtn.BackgroundTransparency = 1 
+    ToggleBtn.Position = UDim2.new(0.5, -30, 0.1, 0) 
+    ToggleBtn.Size = UDim2.new(0, 60, 0, 60) 
+    ToggleBtn.Image = "rbxthumb://type=Asset&id=82100122245666&w=150&h=150"
+
+    local dragging, dragStart, startPos, clickTime = false, nil, nil, 0
+
+    ToggleBtn.InputBegan:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = true
+            dragStart = input.Position
+            startPos = ToggleBtn.Position
+            clickTime = tick() 
+        end
+    end)
+
+    ToggleBtn.InputEnded:Connect(function(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+            dragging = false
+            if tick() - clickTime < 0.2 then
+                VirtualUser:SendKeyEvent(true, Enum.KeyCode.LeftControl, false, game)
+                task.wait(0.05)
+                VirtualUser:SendKeyEvent(false, Enum.KeyCode.LeftControl, false, game)
+            end
+        end
+    end)
+
+    UserInputService.InputChanged:Connect(function(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local delta = input.Position - dragStart
+            ToggleBtn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+        end
+    end)
+end
+
+-- =========================================================
+-- ลูปการทำงานเบื้องหลัง (ระบบอัจฉริยะ)
+-- =========================================================
+local CurrentTrainTarget = nil 
+
+task.spawn(function()
+    while task.wait() do
+        -- [ กรณีเปิดพร้อมกันทั้ง 2 อย่าง ] : Train -> Stop -> จำเงิน -> Throw -> รอเงินเด้ง -> รอ 1 วิ
+        if MoMoConfig.AutoTrain and MoMoConfig.AutoThrow then
+            local bestTarget = getBestTarget()
+            
+            if bestTarget then pcall(function() trainRemote:FireServer(bestTarget) end) end
+            
+            local waitTime = MoMoConfig.TrainDuration or 10
+            local elapsed = 0
+            while elapsed < waitTime and MoMoConfig.AutoTrain and MoMoConfig.AutoThrow do
+                task.wait(0.1)
+                elapsed = elapsed + 0.1
+            end
+            
+            if not (MoMoConfig.AutoTrain and MoMoConfig.AutoThrow) then continue end
+            
+            pcall(function() stopTrainRemote:FireServer() end)
+            task.wait(0.2) 
+            
+            local oldCash = 0
+            local cashStat = player:WaitForChild("leaderstats"):WaitForChild("Cash")
+            if cashStat then oldCash = cashStat.Value end
+            
+            if MoMoConfig.ThrowZone then 
+                pcall(function() throwRemote:FireServer(MoMoConfig.ThrowZone) end) 
+            end
+            
+            if cashStat then
+                local timeout = 0
+                while MoMoConfig.AutoTrain and MoMoConfig.AutoThrow and timeout < 15 do 
+                    task.wait(0.1)
+                    timeout = timeout + 0.1
+                    if cashStat.Value > oldCash then
+                        task.wait(3) 
+                        break 
+                    end
+                end
+            end
+
+        -- [ กรณีเปิดแค่ Auto Train อย่างเดียว ]
+        elseif MoMoConfig.AutoTrain and not MoMoConfig.AutoThrow then
+            local bestTarget = getBestTarget()
+            if bestTarget then 
+                if CurrentTrainTarget ~= bestTarget then
+                    pcall(function() stopTrainRemote:FireServer() end)
+                    task.wait(0.2)
+                    pcall(function() trainRemote:FireServer(bestTarget) end) 
+                    CurrentTrainTarget = bestTarget
+                else
+                    pcall(function() trainRemote:FireServer(bestTarget) end)
+                end
+            end
+            task.wait(0.5) 
+
+        -- [ กรณีเปิดแค่ Auto Throw อย่างเดียว ]
+        elseif MoMoConfig.AutoThrow and not MoMoConfig.AutoTrain then
+            if MoMoConfig.ThrowZone then 
+                pcall(function() throwRemote:FireServer(MoMoConfig.ThrowZone) end) 
+            end
+            task.wait(0.1)
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(1) do
+        if MoMoConfig.AutoRebirth then pcall(function() rebirthRemote:FireServer() end) end
+        if MoMoConfig.AutoSpear then
+            pcall(function()
+                local cash = player.leaderstats.Cash.Value
+                for _, cat in pairs(ReplicatedStorage.Assets.Spears:GetChildren()) do
+                    for _, spear in pairs(cat:GetChildren()) do
+                        if spear:GetAttribute("Currency") == "Cash" and cash >= spear:GetAttribute("Price") then
+                            buySpearRemote:FireServer(spear.Name)
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(0.5) do
+        if MoMoConfig.AutoEgg and MoMoConfig.SelectedEgg then pcall(function() buyEggRemote:InvokeServer(MoMoConfig.SelectedEgg, 1) end) end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(5) do
+        if MoMoConfig.AutoSpin then pcall(function() spinRemote:InvokeServer() end) end
+        if MoMoConfig.AutoClaimQuest then pcall(function() claimQuestEggRemote:FireServer() end) end
+    end
+end)
+
+task.spawn(function()
+    while task.wait(10) do
+        if MoMoConfig.AutoClaimDaily then for i = 1, 30 do pcall(function() claimDailyRemote:FireServer(i) end) end end
+        if MoMoConfig.AutoClaimGift then for i = 1, 12 do pcall(function() claimGiftRemote:FireServer(i) end) end end
+        
+        -- ลูปสำหรับ Auto Use Potion (เช็คทุกๆ 10 วิ)
+        if MoMoConfig.AutoPotion_Cash then pcall(function() usePotionRemote:FireServer("Cash") end) end
+        if MoMoConfig.AutoPotion_Power then pcall(function() usePotionRemote:FireServer("Power") end) end
+        if MoMoConfig.AutoPotion_Luck then pcall(function() usePotionRemote:FireServer("Luck") end) end
+    end
+end)
+
+-- โหลดสถานะ Black Screen ตั้งแต่เริ่มถ้าระบบตั้ง Auto Load ไว้
+if MoMoConfig.BlackScreen then
+    ToggleBlackScreen(true)
+end
+
+-- แจ้งเตือนเมื่อรันเสร็จ
+Window:Notify({
+    Title = "MoMoHub",
+    Desc = "Loaded Successfully! " .. (MoMoConfig.AutoLoad and "[Config Applied]" or ""),
+    Time = 4
+})
