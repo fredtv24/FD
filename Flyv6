@@ -1,0 +1,362 @@
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local Camera = workspace.CurrentCamera
+local lp = Players.LocalPlayer
+
+local flySpeed = 50
+local FLYING = false
+local flyMobile, MobileWeld, FlySignal1, FlySignal2 = nil, nil, nil, nil
+
+local function getControlModule()
+    local ok, ctrl = pcall(function()
+        return require(lp.PlayerScripts:WaitForChild("PlayerModule",3):WaitForChild("ControlModule",3))
+    end)
+    if ok and ctrl then return ctrl end
+end
+local ctrlModule = getControlModule()
+
+local function GetMoveVector()
+    if ctrlModule then
+        local ok, vec = pcall(function() return ctrlModule:GetMoveVector() end)
+        if ok and typeof(vec) == "Vector3" and vec.Magnitude > 0 then return vec end
+    end
+    local hum = lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
+    if hum and hum.MoveDirection.Magnitude > 0 then return hum.MoveDirection end
+    return Vector3.zero
+end
+
+local function startFly()
+    local char = lp.Character or lp.CharacterAdded:Wait()
+    if flyMobile then flyMobile:Destroy() end
+    flyMobile = Instance.new("Part", workspace)
+    flyMobile.Size = Vector3.new(0.05,0.05,0.05)
+    flyMobile.CanCollide = false; flyMobile.Transparency = 1
+    flyMobile.Anchored = false; flyMobile.Massless = true
+    if MobileWeld then MobileWeld:Destroy() end
+    MobileWeld = Instance.new("Weld", flyMobile)
+    MobileWeld.Part0 = flyMobile
+    MobileWeld.Part1 = char:FindFirstChildWhichIsA("Humanoid").RootPart
+    MobileWeld.C0 = CFrame.new(0,0,0)
+    local bv = Instance.new("BodyVelocity", flyMobile)
+    bv.MaxForce = Vector3.new(0,0,0); bv.Velocity = Vector3.new(0,0,0)
+    local bg = Instance.new("BodyGyro", flyMobile)
+    bg.MaxTorque = Vector3.new(9e9,9e9,9e9); bg.P = 1000; bg.D = 50
+    if FlySignal1 then FlySignal1:Disconnect() end
+    FlySignal1 = lp.CharacterAdded:Connect(function(newChar)
+        MobileWeld.Part0 = flyMobile
+        MobileWeld.Part1 = newChar:FindFirstChildWhichIsA("Humanoid").RootPart
+        MobileWeld.C0 = CFrame.new(0,0,0)
+    end)
+    if FlySignal2 then FlySignal2:Disconnect() end
+    FlySignal2 = RunService.RenderStepped:Connect(function()
+        local char2 = lp.Character
+        local hum2 = char2 and char2:FindFirstChildOfClass("Humanoid")
+        local bv2 = flyMobile and flyMobile:FindFirstChildWhichIsA("BodyVelocity")
+        local bg2 = flyMobile and flyMobile:FindFirstChildWhichIsA("BodyGyro")
+        if char2 and hum2 and flyMobile and MobileWeld and bv2 and bg2 then
+            bv2.MaxForce = Vector3.new(9e9,9e9,9e9)
+            bg2.MaxTorque = Vector3.new(9e9,9e9,9e9)
+            hum2.PlatformStand = true
+            bg2.CFrame = Camera.CFrame
+            local dir = GetMoveVector()
+            local vel = Vector3.new()
+            if dir.X ~= 0 then vel = vel + Camera.CFrame.RightVector*(dir.X*flySpeed*50) end
+            if dir.Z ~= 0 then vel = vel - Camera.CFrame.LookVector*(dir.Z*flySpeed*50) end
+            bv2.Velocity = vel
+        end
+    end)
+    FLYING = true
+end
+
+local function stopFly()
+    if flyMobile then flyMobile:Destroy(); flyMobile = nil end
+    if MobileWeld then MobileWeld:Destroy(); MobileWeld = nil end
+    local hum = lp.Character and lp.Character:FindFirstChildOfClass("Humanoid")
+    if hum then hum.PlatformStand = false end
+    if FlySignal1 then FlySignal1:Disconnect(); FlySignal1 = nil end
+    if FlySignal2 then FlySignal2:Disconnect(); FlySignal2 = nil end
+    FLYING = false
+end
+
+local function killSwitch(gui)
+    stopFly()
+    pcall(function() gui:Destroy() end)
+end
+
+local ICON_FONT = "rbxasset://LuaPackages/Packages/_Index/BuilderIcons/BuilderIcons/BuilderIcons.json"
+local function iconText(name)
+    return '<font family="'..ICON_FONT..'">'..name..'</font>'
+end
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "FlyMobileUI"
+gui.ResetOnSpawn = false
+gui.DisplayOrder = 999
+gui.IgnoreGuiInset = true
+pcall(function() gui.Parent = game:GetService("CoreGui") end)
+if not gui.Parent then gui.Parent = lp.PlayerGui end
+
+local bubble = Instance.new("TextButton", gui)
+bubble.Size = UDim2.new(0,42,0,42)
+bubble.Position = UDim2.new(0.5,-21,0,20)
+bubble.BackgroundColor3 = Color3.fromRGB(0,0,0)
+bubble.Text = "F"
+bubble.TextColor3 = Color3.fromRGB(0,170,255)
+bubble.TextSize = 18
+bubble.Font = Enum.Font.GothamBold
+bubble.BorderSizePixel = 0
+bubble.Visible = false
+bubble.ZIndex = 100
+Instance.new("UICorner", bubble).CornerRadius = UDim.new(1,0)
+local bubbleStroke = Instance.new("UIStroke", bubble)
+bubbleStroke.Color = Color3.fromRGB(0,170,255); bubbleStroke.Thickness = 2
+
+local frame = Instance.new("Frame", gui)
+frame.Size = UDim2.new(0,230,0,112)
+frame.Position = UDim2.new(0.5,-115,0,20)
+frame.BackgroundColor3 = Color3.fromRGB(8,8,14)
+frame.BorderSizePixel = 0
+frame.Active = true
+frame.Draggable = true
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0,10)
+local fs = Instance.new("UIStroke", frame)
+fs.Color = Color3.fromRGB(0,170,255); fs.Thickness = 1; fs.Transparency = 0.4
+
+local header = Instance.new("Frame", frame)
+header.Size = UDim2.new(1,0,0,36)
+header.BackgroundColor3 = Color3.fromRGB(5,5,10)
+header.BorderSizePixel = 0
+Instance.new("UICorner", header).CornerRadius = UDim.new(0,10)
+local hfix = Instance.new("Frame", header)
+hfix.Size = UDim2.new(1,0,0.5,0); hfix.Position = UDim2.new(0,0,0.5,0)
+hfix.BackgroundColor3 = Color3.fromRGB(5,5,10); hfix.BorderSizePixel = 0
+local hline = Instance.new("Frame", header)
+hline.Size = UDim2.new(1,0,0,1); hline.Position = UDim2.new(0,0,1,-1)
+hline.BackgroundColor3 = Color3.fromRGB(0,150,220); hline.BorderSizePixel = 0
+
+local title = Instance.new("TextLabel", header)
+title.Size = UDim2.new(1,-60,0,16)
+title.Position = UDim2.new(0,10,0,3)
+title.BackgroundTransparency = 1
+title.Text = "Fly | Mobile"
+title.TextColor3 = Color3.fromRGB(0,210,255)
+title.TextSize = 13
+title.Font = Enum.Font.GothamBold
+title.TextXAlignment = Enum.TextXAlignment.Left
+
+local subText = "by camudongogg"
+local subLetters = {}
+local subContainer = Instance.new("Frame", header)
+subContainer.Size = UDim2.new(1,-60,0,12)
+subContainer.Position = UDim2.new(0,10,0,21)
+subContainer.BackgroundTransparency = 1
+
+local totalW = 0
+local letterW = 7
+for i = 1, #subText do
+    local lbl = Instance.new("TextLabel", subContainer)
+    lbl.Size = UDim2.new(0, letterW, 1, 0)
+    lbl.Position = UDim2.new(0, (i-1)*letterW, 0, 0)
+    lbl.BackgroundTransparency = 1
+    lbl.Text = subText:sub(i,i)
+    lbl.TextColor3 = Color3.fromRGB(50, 90, 130)
+    lbl.TextSize = 9
+    lbl.Font = Enum.Font.Gotham
+    lbl.TextXAlignment = Enum.TextXAlignment.Center
+    table.insert(subLetters, lbl)
+    totalW = i * letterW
+end
+subContainer.Size = UDim2.new(0, totalW, 0, 12)
+
+local waveIndex = 0
+task.spawn(function()
+    while gui and gui.Parent do
+        waveIndex = (waveIndex % #subLetters) + 1
+        for i, lbl in ipairs(subLetters) do
+            local dist = math.abs(i - waveIndex)
+            if dist == 0 then
+                TweenService:Create(lbl, TweenInfo.new(0.08), {TextColor3 = Color3.fromRGB(210, 225, 240)}):Play()
+            elseif dist == 1 then
+                TweenService:Create(lbl, TweenInfo.new(0.12), {TextColor3 = Color3.fromRGB(120, 150, 180)}):Play()
+            elseif dist == 2 then
+                TweenService:Create(lbl, TweenInfo.new(0.18), {TextColor3 = Color3.fromRGB(70, 105, 140)}):Play()
+            else
+                TweenService:Create(lbl, TweenInfo.new(0.25), {TextColor3 = Color3.fromRGB(50, 90, 130)}):Play()
+            end
+        end
+        task.wait(0.09)
+    end
+end)
+
+local function makeBtn(iconName, offsetX)
+    local btn = Instance.new("TextButton", header)
+    btn.Size = UDim2.new(0,22,0,22)
+    btn.Position = UDim2.new(1, offsetX, 0.5, -11)
+    btn.BackgroundTransparency = 1
+    btn.BorderSizePixel = 0
+    btn.RichText = true
+    btn.Text = iconText(iconName)
+    btn.TextColor3 = Color3.fromRGB(140,140,180)
+    btn.TextSize = 15
+    btn.Font = Enum.Font.GothamBold
+    btn.ZIndex = 5
+    btn.MouseEnter:Connect(function()
+        TweenService:Create(btn,TweenInfo.new(0.1),{TextColor3=Color3.fromRGB(0,210,255)}):Play()
+    end)
+    btn.MouseLeave:Connect(function()
+        TweenService:Create(btn,TweenInfo.new(0.1),{TextColor3=Color3.fromRGB(140,140,180)}):Play()
+    end)
+    return btn
+end
+
+local minBtn   = makeBtn("chevron-small-down", -50)
+local closeBtn = makeBtn("x", -26)
+
+closeBtn.Activated:Connect(function()
+    killSwitch(gui)
+end)
+
+local minimized = false
+local bubbleSavedPos = nil
+local bDrag, bDragStart = false, nil
+
+bubble.InputBegan:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1
+    or i.UserInputType == Enum.UserInputType.Touch then
+        bDrag = true
+        bDragStart = {
+            mouse  = i.Position,
+            bubble = bubble.Position
+        }
+    end
+end)
+bubble.InputEnded:Connect(function(i)
+    if i.UserInputType == Enum.UserInputType.MouseButton1
+    or i.UserInputType == Enum.UserInputType.Touch then
+        bDrag = false
+        bubbleSavedPos = bubble.Position
+    end
+end)
+UserInputService.InputChanged:Connect(function(i)
+    if bDrag and (i.UserInputType == Enum.UserInputType.MouseMovement
+    or i.UserInputType == Enum.UserInputType.Touch) then
+        if not bDragStart then return end
+        local d = i.Position - bDragStart.mouse
+        bubble.Position = UDim2.new(
+            0, bDragStart.bubble.X.Offset + d.X,
+            0, bDragStart.bubble.Y.Offset + d.Y
+        )
+    end
+end)
+
+minBtn.Activated:Connect(function()
+    if minimized then return end
+    minimized = true
+    if bubbleSavedPos then
+        bubble.Position = bubbleSavedPos
+    else
+        local vp = Camera.ViewportSize
+        local ax = frame.Position.X.Scale * vp.X + frame.Position.X.Offset
+        local ay = frame.Position.Y.Scale * vp.Y + frame.Position.Y.Offset
+        bubble.Position = UDim2.new(0, ax + frame.AbsoluteSize.X/2 - 21, 0, ay + frame.AbsoluteSize.Y/2 - 21)
+    end
+    frame.Visible = false
+    bubble.Visible = true
+end)
+
+bubble.Activated:Connect(function()
+    if not minimized then return end
+    minimized = false
+    bubble.Visible = false
+    frame.Visible = true
+end)
+
+local flyBtn = Instance.new("TextButton", frame)
+flyBtn.Size = UDim2.new(0,90,0,30)
+flyBtn.Position = UDim2.new(0,10,0,48)
+flyBtn.BackgroundColor3 = Color3.fromRGB(0,45,80)
+flyBtn.BorderSizePixel = 0
+flyBtn.Text = "Fly: OFF"
+flyBtn.TextColor3 = Color3.fromRGB(0,180,255)
+flyBtn.TextSize = 12
+flyBtn.Font = Enum.Font.GothamBold
+Instance.new("UICorner", flyBtn).CornerRadius = UDim.new(0,8)
+Instance.new("UIStroke", flyBtn).Color = Color3.fromRGB(0,100,160)
+
+flyBtn.Activated:Connect(function()
+    if FLYING then
+        stopFly()
+        flyBtn.Text = "Fly: OFF"
+        TweenService:Create(flyBtn,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(0,45,80)}):Play()
+    else
+        startFly()
+        flyBtn.Text = "Fly: ON"
+        TweenService:Create(flyBtn,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(0,90,160)}):Play()
+    end
+end)
+
+local speedBox = Instance.new("TextBox", frame)
+speedBox.Size = UDim2.new(0,108,0,30)
+speedBox.Position = UDim2.new(0,112,0,48)
+speedBox.BackgroundColor3 = Color3.fromRGB(13,13,22)
+speedBox.BorderSizePixel = 0
+speedBox.Text = tostring(flySpeed)
+speedBox.PlaceholderText = "Speed..."
+speedBox.TextColor3 = Color3.fromRGB(0,210,255)
+speedBox.PlaceholderColor3 = Color3.fromRGB(60,80,100)
+speedBox.TextSize = 12
+speedBox.Font = Enum.Font.Gotham
+speedBox.ClearTextOnFocus = false
+Instance.new("UICorner", speedBox).CornerRadius = UDim.new(0,8)
+local sbStroke = Instance.new("UIStroke", speedBox)
+sbStroke.Color = Color3.fromRGB(0,80,120)
+
+speedBox.Focused:Connect(function()
+    TweenService:Create(sbStroke,TweenInfo.new(0.15),{Color=Color3.fromRGB(0,170,255)}):Play()
+end)
+speedBox.FocusLost:Connect(function()
+    TweenService:Create(sbStroke,TweenInfo.new(0.15),{Color=Color3.fromRGB(0,80,120)}):Play()
+    local num = tonumber(speedBox.Text)
+    if num then
+        flySpeed = math.clamp(num, 1, 500)
+        speedBox.Text = tostring(flySpeed)
+        if FLYING then stopFly(); startFly() end
+    else
+        speedBox.Text = tostring(flySpeed)
+    end
+end)
+
+local hint = Instance.new("TextLabel", frame)
+hint.Size = UDim2.new(1,-20,0,18)
+hint.Position = UDim2.new(0,10,0,90)
+hint.BackgroundTransparency = 1
+hint.Text = 'Chat: "!fly [speed]" to fly  ·  "!unfly" to stop'
+hint.TextColor3 = Color3.fromRGB(35,60,90)
+hint.TextSize = 8
+hint.Font = Enum.Font.Gotham
+hint.TextXAlignment = Enum.TextXAlignment.Left
+hint.TextWrapped = true
+
+lp.Chatted:Connect(function(msg)
+    local cmd = msg:lower()
+    if cmd:sub(1,4) == "!fly" then
+        local speed = tonumber(cmd:match("!fly%s+(%d+)"))
+        if speed then
+            flySpeed = math.clamp(speed, 1, 500)
+            speedBox.Text = tostring(flySpeed)
+        end
+        if not FLYING then
+            startFly()
+            flyBtn.Text = "Fly: ON"
+            TweenService:Create(flyBtn,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(0,90,160)}):Play()
+        end
+    elseif cmd == "!unfly" then
+        if FLYING then
+            stopFly()
+            flyBtn.Text = "Fly: OFF"
+            TweenService:Create(flyBtn,TweenInfo.new(0.15),{BackgroundColor3=Color3.fromRGB(0,45,80)}):Play()
+        end
+    end
+end)
