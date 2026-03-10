@@ -2,7 +2,7 @@ local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
    Name = "Tree Hub | Chop your tree V12",
-   LoadingTitle = "Carregando ConfiguraÃ§Ãµes...",
+   LoadingTitle = "Carregando Configurações...",
    LoadingSubtitle = "by Gemini",
    ConfigurationSaving = { Enabled = true, FolderName = "TreeHubConfig", FileName = "TreeHub" }
 })
@@ -13,7 +13,7 @@ local AutoUpgrade = false
 local AutoTree = false
 local AutoPrestige = false
 
--- 1. AUTO TREE + MAGNET COIN (DISTÃ‚NCIA NORMAL)
+-- 3. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
 MainTab:CreateToggle({
    Name = "Auto Tree + Magnet Coin",
    CurrentValue = false,
@@ -23,11 +23,7 @@ MainTab:CreateToggle({
       task.spawn(function()
          while AutoTree do
             pcall(function()
-   task.spawn(function()
-    while task.wait(0.2) do
-        if AutoAxeEnabled then
-            pcall(function()        
-               -- Bater na Ã¡rvore
+               -- Bater na árvore
                game:GetService("ReplicatedStorage").Remotes.AxeSwing:FireServer()
                
                -- Coletar Moedas (Magnet)
@@ -45,13 +41,3 @@ MainTab:CreateToggle({
       end)
    end,
 })
-
--- ANTI-AFK (IMPEDE O KICK POR INATIVIDADE)
-pcall(function()
-    local vu = game:GetService("VirtualUser")
-    game:GetService("Players").LocalPlayer.Idled:Connect(function()
-        vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-        task.wait(1)
-        vu:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-    end)
-end)
