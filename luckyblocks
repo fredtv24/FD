@@ -181,3 +181,54 @@ task.spawn(function()
     end
 end)
 
+-- ═══════════════════════════════════════════════════════════════
+-- FUNÇÃO ANTI-AFK
+-- ═══════════════════════════════════════════════════════════════
+
+local function enableAntiAFK()
+    -- Previne kick por inatividade
+    AntiAFKConnection = player.Idled:Connect(function() -- ← CORREÇÃO: lp → player
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end
+
+local function disableAntiAFK()
+    if AntiAFKConnection then
+        AntiAFKConnection:Disconnect()
+        AntiAFKConnection = nil
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - ANTI AFK
+-- ═══════════════════════════════════════════════════════════════
+
+AFKTab:CreateToggle({
+    Name = "Anti-AFK",
+    CurrentValue = false,
+    Flag = "AntiAFK",
+    Callback = function(value)
+        AntiAFKEnabled = value
+        
+        if value then
+            enableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Enabled",
+                Content = "You won't be kicked for inactivity!",
+                Duration = 3,
+                Image = 4483362458
+            })
+        else
+            disableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Disabled",
+                Content = "AFK protection disabled",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
