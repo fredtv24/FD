@@ -1,0 +1,1199 @@
+--// SISTEMA DE VERIFICAÇÃO - TELA CHEIA COM VERDE NEON + SALVAR JSON
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+
+local targetUsername = "CAMUDONGOgg"
+local saveFileName = "Zombie_Verified.json"
+
+-- Verificar se já foi verificado antes
+local function isAlreadyVerified()
+    if isfile and readfile then
+        local success = pcall(function()
+            return isfile(saveFileName)
+        end)
+        return success and isfile(saveFileName)
+    end
+    return false
+end
+
+-- Salvar verificação no JSON
+local function saveVerification()
+    if writefile then
+        pcall(function()
+            local HttpService = game:GetService("HttpService")
+            local data = {
+                verified = true,
+                username = player.Name,
+                userId = player.UserId,
+                timestamp = os.time(),
+                date = os.date("%Y-%m-%d %H:%M:%S")
+            }
+            writefile(saveFileName, HttpService:JSONEncode(data))
+        end)
+    end
+end
+
+-- Se NÃO foi verificado antes, mostrar tela de bloqueio
+if not isAlreadyVerified() then
+    -- CRIAR O ARQUIVO JSON IMEDIATAMENTE (PRIMEIRA EXECUÇÃO)
+    saveVerification()
+    
+    local ScreenGui = Instance.new("ScreenGui")
+    ScreenGui.Name = "FollowerCheckGui"
+    ScreenGui.ResetOnSpawn = false
+    ScreenGui.IgnoreGuiInset = true
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.Parent = game:GetService("CoreGui")
+    
+    -- Fundo preto TELA CHEIA bloqueando TUDO
+    local Background = Instance.new("Frame")
+    Background.Name = "Background"
+    Background.Size = UDim2.new(1, 0, 1, 0)
+    Background.Position = UDim2.new(0, 0, 0, 0)
+    Background.AnchorPoint = Vector2.new(0, 0)
+    Background.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    Background.BorderSizePixel = 0
+    Background.ZIndex = 999999
+    Background.Parent = ScreenGui
+    
+    -- Mensagem GIGANTE no centro com VERDE NEON
+    local Message = Instance.new("TextLabel")
+    Message.Name = "Message"
+    Message.Size = UDim2.new(1, 0, 1, 0)
+    Message.Position = UDim2.new(0, 0, 0, 0)
+    Message.AnchorPoint = Vector2.new(0, 0)
+    Message.BackgroundTransparency = 1
+    Message.Text = 'FOLLOW THE PROFILE\n\n"' .. targetUsername .. '"\n\nTO USE THIS SCRIPT'
+    Message.TextColor3 = Color3.fromRGB(0, 255, 120) -- Verde Neon
+    Message.TextSize = 48
+    Message.Font = Enum.Font.GothamBold
+    Message.TextXAlignment = Enum.TextXAlignment.Center
+    Message.TextYAlignment = Enum.TextYAlignment.Center
+    Message.TextWrapped = true
+    Message.ZIndex = 1000000
+    Message.Parent = Background
+    
+    -- Efeito de brilho/stroke no texto
+    local TextStroke = Instance.new("UIStroke")
+    TextStroke.Color = Color3.fromRGB(0, 255, 120)
+    TextStroke.Thickness = 2
+    TextStroke.Parent = Message
+    
+    -- Efeito de pulsar no texto
+    task.spawn(function()
+        while Message.Parent do
+            for i = 48, 54, 0.5 do
+                if not Message.Parent then break end
+                Message.TextSize = i
+                task.wait(0.05)
+            end
+            for i = 54, 48, -0.5 do
+                if not Message.Parent then break end
+                Message.TextSize = i
+                task.wait(0.05)
+            end
+        end
+    end)
+    
+    -- BLOQUEIA A EXECUÇÃO - NÃO CARREGA RAYFIELD
+    return
+end
+
+
+--// CARREGAR RAYFIELD
+local Rayfield = loadstring(game:HttpGet("https://sirius.menu/rayfield"))()
+
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+local lp = player 
+
+local function IsTotem(tool)
+    return tool and tool:IsA("Tool") and tool.Name == "Totem"
+end
+
+--// CRIAR WINDOW
+local Window = Rayfield:CreateWindow({
+    Name = "YING ZOMBIE KILL",
+    LoadingTitle = "CAMUDONGOGG ON THE TOP",
+    LoadingSubtitle = "by CAMUDONGOgg",
+    ConfigurationSaving = {
+        Enabled = false
+    }
+})
+
+--// TAB FARM
+local FarmTab = Window:CreateTab("Farm", 4483362458)
+
+--// VARIÁVEIS
+local AutoCollectEnabled = false
+local AutoClickEnabled = false
+local AutoAxeEnabled = false
+local AutoPlantEnabled = false
+local EquippedTool = nil
+local PlantSpeed = 0.1 
+local SavedCFrame = nil
+local AutoXPFarmGlobal = false
+local AutoWateringEnabled = false
+local AutoAxe = false
+local AutoTotem = false
+local vim = game:GetService("VirtualInputManager")
+local lp = game:GetService("Players").LocalPlayer
+
+--// ════════════════════════════════════════════════════════════
+--// FUNÇÕES WATERING CAN (VERSÃO WORKSPACE.MUTATIONS)
+--// ════════════════════════════════════════════════════════════
+
+local function getAllWateringCans()
+    local cans = {}
+    local mutationCount = {}
+    
+    pcall(function()
+        local mutations = workspace:FindFirstChild("Mutations")
+        if not mutations then return end
+        
+        for _, mutationFolder in pairs(mutations:GetChildren()) do
+            local count = 0
+            
+            for _, obj in pairs(mutationFolder:GetChildren()) do
+                if obj.Name == "WateringCan" or obj:IsA("Model") or obj:IsA("Part") then
+                    table.insert(cans, obj)
+                    count = count + 1
+                end
+            end
+            
+            if count > 0 then
+                mutationCount[mutationFolder.Name] = count
+            end
+        end
+    end)
+    
+    return cans, mutationCount
+end
+
+local function clickAllWateringCans()
+    task.spawn(function()
+        pcall(function()
+            local cans = getAllWateringCans()
+            if #cans == 0 then return end
+            
+            for i, can in ipairs(cans) do
+                if can and can.Parent then
+                    pcall(function()
+                        local args = { [1] = can }
+                        game:GetService("ReplicatedStorage").Remotes.ClickWateringCan:FireServer(unpack(args))
+                    end)
+                    task.wait(0.05)
+                end
+            end
+        end)
+    end)
+end
+
+-- Função para simular clique na tela
+local function tocarNaTela()
+    local viewport = workspace.CurrentCamera.ViewportSize
+    local x, y = viewport.X / 2, viewport.Y / 2
+    vim:SendMouseButtonEvent(x, y, 0, true, game, 1)
+    task.wait(0.05)
+    vim:SendMouseButtonEvent(x, y, 0, false, game, 1)
+end
+
+-- Função principal do Farm
+local function iniciarFarm(caixaNome)
+    local pGui = lp:WaitForChild("PlayerGui")
+    
+    -- 1. Ativa o Prompt
+    local prompt = workspace.Crates[caixaNome].Crate:FindFirstChild("Buy")
+    if prompt and prompt:IsA("ProximityPrompt") then
+        fireproximityprompt(prompt)
+    end
+    
+    task.wait(0.7)
+
+    -- 2. Clica no Buy3
+    local buyMenu = pGui:FindFirstChild("CratePrompt")
+    if buyMenu and buyMenu.Main.Visible then
+        local btnBuy = buyMenu.Main:FindFirstChild("Buy3")
+        if btnBuy then
+            for _, c in pairs(getconnections(btnBuy.MouseButton1Click)) do c:Fire() end
+            for _, c in pairs(getconnections(btnBuy.Activated)) do c:Fire() end
+            
+            -- 3. Cliques para pular animação
+            task.wait(0.8) 
+            for i = 1, 5 do
+                tocarNaTela()
+                task.wait(0.1)
+            end
+        end
+    end
+    
+    -- 4. Devolve o HUD
+    local touchGui = pGui:FindFirstChild("TouchGui")
+    if touchGui and not touchGui.Enabled then
+        touchGui.Enabled = true
+    end
+end
+
+--// ════════════════════════════════════════════════════════════
+--// TOGGLES E BOTÕES (TODAS AS FUNÇÕES JUNTAS)
+--// ════════════════════════════════════════════════════════════
+
+FarmTab:CreateToggle({
+    Name = "Auto Collect Coin",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoCollectEnabled = value
+    end,
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Click",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoClickEnabled = value
+    end,
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Sword",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoAxeEnabled = value
+    end,
+})
+
+
+FarmTab:CreateToggle({
+    Name = "Auto Feed Zombie (Recommended for VIP servers)",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoXPFarmGlobal = value
+        if value then
+            Rayfield:Notify({
+                Title = "All Brains Xp",
+                Content = "Equipping brains",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+FarmTab:CreateButton({
+    Name = "Scan All Mutations",
+    Callback = function()
+        local cans, mutationCount = getAllWateringCans()
+        
+        local mutationText = ""
+        for mutationName, count in pairs(mutationCount) do
+            mutationText = mutationText .. "\n• " .. mutationName .. ": " .. count
+        end
+        
+        Rayfield:Notify({
+            Title = "Scan Full",
+            Content = "Total: " .. #cans .. " WateringCans" .. mutationText,
+            Duration = 5,
+            Image = 4483362458
+        })
+    end
+})
+
+FarmTab:CreateButton({
+    Name = "Click All  Brains Now! ",
+    Callback = function()
+        local cans = getAllWateringCans()
+        
+        Rayfield:Notify({
+            Title = "Clicking ",
+            Content = "Processando " .. #cans .. " WateringCans!",
+            Duration = 2,
+            Image = 4483362458
+        })
+        
+        clickAllWateringCans()
+    end
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Click Brains Loop",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoWateringEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Click: ON ",
+                Content = "Clicking in all brains!",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+local loopDelay = 1
+
+FarmTab:CreateSlider({
+    Name = "Loop Delay (segundos)",
+    Range = {0.5, 5},
+    Increment = 0.1,
+    CurrentValue = 1,
+    Callback = function(value)
+        loopDelay = value
+    end
+})
+
+--// ════════════════════════════════════════════════════════════
+--// PARÁGRAFOS NO FINAL
+--// ════════════════════════════════════════════════════════════
+
+FarmTab:CreateParagraph({
+    Title = "━━━━━━━━━━━━━━━━━━━━━━━",
+    Content = ""
+})
+
+FarmTab:CreateParagraph({
+    Title = "💧 Watering Can System",
+    Content = "Collect all the brains from all the mutations (THIS FUNCTION WORKS MUCH BETTER ON PRIVATE SERVERS (VIP SERVERS) (THEY ARE FREE IN THIS GAME)"
+})
+
+FarmTab:CreateParagraph({
+    Title = "Auto Farm Info",
+    Content = "Auto Collect: Pulls coins\nAuto Click: Click in Brain Tank\nAuto Sword: Swings Sword\nBrains Farm: Feed your zombie with Brain\nWatering: Click in all Brains"
+})
+
+--// ════════════════════════════════════════════════════════════
+--// LOOPS
+--// ════════════════════════════════════════════════════════════
+
+--// LOOP AUTO COLLECT COIN
+task.spawn(function()
+    while true do
+        task.wait(0.1)
+        if AutoCollectEnabled then
+            pcall(function()
+                local char = player.Character
+                local torso = char and (char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso"))
+                if not torso then return end
+                
+                local orbsFolder = workspace:FindFirstChild("Orbs")
+                if orbsFolder then
+                    for _, coin in pairs(orbsFolder:GetChildren()) do
+                        if coin.Name == "Coin" then
+                            if coin:IsA("BasePart") then
+                                coin.CFrame = torso.CFrame
+                            elseif coin:IsA("Model") then
+                                coin:PivotTo(torso.CFrame)
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO CLICK
+task.spawn(function()
+    while task.wait(0.2) do
+        if AutoClickEnabled then
+            pcall(function()
+                local plotsFolder = workspace:FindFirstChild("Plots")
+                local char = player.Character
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                if not plotsFolder or not hrp then return end
+                
+                local myPlot = nil
+                for _, plot in pairs(plotsFolder:GetChildren()) do
+                    local owner = plot:FindFirstChild("Owner") or plot:FindFirstChild("OwnerName")
+                    if owner and (owner.Value == player.Name or owner.Value == player) then
+                        myPlot = plot
+                        break
+                    end
+                end
+                
+                if myPlot then
+                    ReplicatedStorage.Remotes.TapButtonClick:FireServer({[1] = myPlot})
+                end
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO AXE
+task.spawn(function()
+    while task.wait(0.2) do
+        if AutoAxeEnabled then
+            pcall(function()
+                ReplicatedStorage.Remotes.AxeSwing:FireServer()
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO XP FARM (CLICA EM QUALQUER OBJETO DE MUTATIONS.NORMAL)
+task.spawn(function()
+    while true do
+        task.wait(0.2)
+        if AutoXPFarmGlobal then
+            pcall(function()
+                local char = player.Character
+                local hum = char and char:FindFirstChildOfClass("Humanoid")
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                local backpack = player:FindFirstChild("Backpack")
+                
+                if not hrp or not hum then return end
+
+                -- [1] VERIFICAR SE JÁ TEM ITEM XP EQUIPADO
+                local hasXPEquipped = false
+                for _, item in pairs(char:GetChildren()) do
+                    if item:IsA("Tool") and string.find(item.Name:upper(), "XP") then
+                        hasXPEquipped = true
+                        break
+                    end
+                end
+                
+                -- [2] EQUIPAR APENAS 1 ITEM XP (SE NÃO TIVER)
+                if not hasXPEquipped and backpack then
+                    for _, item in pairs(backpack:GetChildren()) do
+                        if item:IsA("Tool") and string.find(item.Name:upper(), "XP") then
+                            hum:EquipTool(item)
+                            task.wait(0.3)
+                            break
+                        end
+                    end
+                end
+                
+                -- [3] PEGAR QUALQUER OBJETO DE WORKSPACE.MUTATIONS.NORMAL
+                local mutations = workspace:FindFirstChild("Mutations")
+                if not mutations then return end
+                
+                local normalFolder = mutations:FindFirstChild("Normal")
+                if not normalFolder then return end
+                
+                local objects = normalFolder:GetChildren()
+                if #objects > 0 then
+                    -- Pega o PRIMEIRO objeto disponível
+                    local randomObject = objects[1]
+                    
+                    -- [4] MANDAR REMOTE
+                    local args = { [1] = randomObject }
+                    game:GetService("ReplicatedStorage").Remotes.TreeClick:InvokeServer(unpack(args))
+                end
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO WATERING CAN
+task.spawn(function()
+    while true do
+        task.wait(loopDelay)
+        
+        if AutoWateringEnabled then
+            clickAllWateringCans()
+        end
+    end
+end)
+
+--// TAB LUCKY BLOCKS
+local LuckyBlocksTab = Window:CreateTab("Lucky Blocks", 4483362458)
+
+--// VARIÁVEIS
+local AutoLuckyBlockEnabled = false
+local AutoRainbowBlockEnabled = false
+
+--// 1. TOGGLE AUTO LUCKY BLOCK NORMAL
+LuckyBlocksTab:CreateToggle({
+    Name = "Auto Lucky Block Normal",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoLuckyBlockEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Lucky Block: ON 🎲",
+                Content = "Collecting lucky blocks...",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        else
+            Rayfield:Notify({
+                Title = "Auto Lucky Block: OFF",
+                Content = "Stopped collecting",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+--// 2. TOGGLE AUTO LUCKY BLOCK RAINBOW
+LuckyBlocksTab:CreateToggle({
+    Name = "Auto Collect Rainbow Lucky Blocks",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoRainbowBlockEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Rainbow Block: ON 🌈",
+                Content = "Collecting rainbow blocks...",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        else
+            Rayfield:Notify({
+                Title = "Auto Rainbow Block: OFF",
+                Content = "Stopped collecting",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+--// 3. PARAGRAPH (AGORA EMBAIXO DAS FUNÇÕES)
+LuckyBlocksTab:CreateParagraph({
+    Title = "Lucky Block Info",
+    Content = "Teleports to Normal lucky block and holds ProximityPrompt for 5 seconds"
+})
+
+--// [LOOP AUTO LUCKY BLOCK]
+task.spawn(function()
+    while task.wait(0.05) do
+        if AutoLuckyBlockEnabled then
+            pcall(function()
+                local char = player.Character
+                if not char then return end
+                
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
+                
+                local debris = workspace:FindFirstChild("Debris")
+                if not debris then return end
+                
+                local normal = debris:FindFirstChild("Normal")
+                if not normal then return end
+                
+                local main = normal:FindFirstChild("Main")
+                if not main then return end
+                
+                local mainPos = main:IsA("Model") and main:GetPivot().Position or main.Position
+                hrp.CFrame = CFrame.new(mainPos + Vector3.new(0, 3, 0))
+                
+                task.wait(0.05)
+                
+                local prompt = main:FindFirstChildOfClass("ProximityPrompt", true)
+                if not prompt then
+                    for _, desc in pairs(main:GetDescendants()) do
+                        if desc:IsA("ProximityPrompt") then
+                            prompt = desc
+                            break
+                        end
+                    end
+                end
+                
+                if prompt then
+                    fireproximityprompt(prompt, 5)
+                    task.wait(0.05)
+                end
+            end)
+        end
+    end
+end)
+
+--// [LOOP AUTO RAINBOW LUCKY BLOCK]
+task.spawn(function()
+    while task.wait(0.05) do
+        if AutoRainbowBlockEnabled then
+            pcall(function()
+                local char = player.Character
+                if not char then return end
+                
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
+                
+                local debris = workspace:FindFirstChild("Debris")
+                if not debris then return end
+                
+                local rainbow = debris:FindFirstChild("Rainbow")
+                if not rainbow then return end
+                
+                local main = rainbow:FindFirstChild("Main")
+                if not main then return end
+                
+                local mainPos
+                if main:IsA("Model") then
+                    mainPos = main:GetPivot().Position
+                elseif main:IsA("BasePart") then
+                    mainPos = main.Position
+                else
+                    local primaryPart = main:FindFirstChildWhichIsA("BasePart")
+                    if primaryPart then mainPos = primaryPart.Position else return end
+                end
+                
+                hrp.CFrame = CFrame.new(mainPos + Vector3.new(0, 3, 0))
+                
+                task.wait(0.05)
+                
+                local prompt = main:FindFirstChildOfClass("ProximityPrompt", true)
+                if not prompt then
+                    for _, desc in pairs(main:GetDescendants()) do
+                        if desc:IsA("ProximityPrompt") then
+                            prompt = desc
+                            break
+                        end
+                    end
+                end
+                
+                if prompt then
+                    fireproximityprompt(prompt, 5)
+                    task.wait(0.05)
+                end
+            end)
+        end
+    end
+end)
+
+
+--// TAB WALKING ZOMBIES
+local ZombiesTab = Window:CreateTab("Zombies", 4483362458)
+
+--// VARIÁVEIS
+local AttackZombiesEnabled = false
+local SavedZombiePosition = nil
+local AlreadyReturned = false -- Flag pra retornar só 1 vez
+
+--// FUNÇÃO PARA EQUIPAR AXE
+local function equipAxe()
+    local success, err = pcall(function()
+        local char = player.Character
+        if not char then return end
+        
+        local equippedAxe = char:FindFirstChild("Axe")
+        if equippedAxe then return end
+        
+        local backpack = player.Backpack
+        local axe = backpack:FindFirstChild("Axe")
+        
+        if axe then
+            local humanoid = char:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid:EquipTool(axe)
+            end
+        end
+    end)
+    
+    if not success then
+        warn("Erro ao equipar axe:", err)
+    end
+end
+
+--// TOGGLE ATTACK ALL WALKING ZOMBIES
+ZombiesTab:CreateToggle({
+    Name = "Attack All Walking Zombies",
+    CurrentValue = false,
+    Callback = function(value)
+        AttackZombiesEnabled = value
+        
+        if value then
+            local char = player.Character
+            if char then
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    SavedZombiePosition = hrp.CFrame
+                    AlreadyReturned = false -- Reseta a flag
+                end
+            end
+            
+            Rayfield:Notify({
+                Title = "Attack Zombies: ON 🧟",
+                Content = "Teleporting to zombies...",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        else
+            Rayfield:Notify({
+                Title = "Attack Zombies: OFF",
+                Content = "Stopped attacking",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+ZombiesTab:CreateParagraph({
+    Title = "Walking Zombies Info",
+    Content = "Automatically teleports to the highest numbered zombie and equips axe"
+})
+
+--// LOOP ATTACK ZOMBIES
+task.spawn(function()
+    while task.wait(0) do
+        if AttackZombiesEnabled then
+            pcall(function()
+                local char = player.Character
+                if not char then return end
+                
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
+                
+                local zombiesFolder = workspace:FindFirstChild("WalkingZombies")
+                if not zombiesFolder then return end
+                
+                local highestZombie = nil
+                local highestNumber = -1
+                
+                for _, zombie in pairs(zombiesFolder:GetChildren()) do
+                    if zombie:IsA("Model") then
+                        local zombieNumber = tonumber(zombie.Name:match("%d+"))
+                        
+                        if zombieNumber and zombieNumber > highestNumber then
+                            highestNumber = zombieNumber
+                            highestZombie = zombie
+                        end
+                    end
+                end
+                
+                if highestZombie then
+                    -- TEM ZOMBIE: Teleporta e equipa axe
+                    local zombiePos = highestZombie:GetPivot().Position
+                    hrp.CFrame = CFrame.new(zombiePos + Vector3.new(0, 3, 0))
+                    
+                    task.wait(0.1)
+                    equipAxe()
+                    
+                    AlreadyReturned = false -- Reseta porque tem zombie
+                else
+                    -- PASTA VAZIA: Retorna APENAS 1 VEZ
+                    if SavedZombiePosition and not AlreadyReturned then
+                        hrp.CFrame = SavedZombiePosition
+                        AlreadyReturned = true -- Marca que já retornou
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+local MainTab = Window:CreateTab("Totem", 4483362458)
+
+local AutoPlantToggle = MainTab:CreateToggle({
+   Name = "Auto Plant Totem",
+   CurrentValue = false,
+   Flag = "AutoPlant",
+   Callback = function(Value)
+      if Value and not SavedCFrame then
+         Rayfield:Notify({
+            Title = "Location Missing",
+            Content = "Please save a location first!",
+            Duration = 3,
+         })
+         return
+      end
+      AutoPlantEnabled = Value
+   end,
+})
+
+MainTab:CreateButton({
+   Name = "📍 Save Totem Location",
+   Callback = function()
+      local character = game.Players.LocalPlayer.Character
+      if character and character:FindFirstChild("HumanoidRootPart") then
+         SavedCFrame = character.HumanoidRootPart.CFrame
+         Rayfield:Notify({
+            Title = "Location Saved!",
+            Content = "Position set successfully.",
+            Duration = 3,
+         })
+      end
+   end,
+})
+
+local InfoLabel = MainTab:CreateLabel("Waiting for Totem...")
+
+MainTab:CreateParagraph({
+    Title = "How it works:", 
+    Content = "Equip your best 'TOTEM', save a location (not in the red area) and activate the 'Auto Plant Totem' feature."
+})
+
+-- LOGICA DE BACKEND (Pode colocar no final do seu script)
+
+-- Detectar Tool
+game.Players.LocalPlayer.Character.ChildAdded:Connect(function(child)
+   if IsTotem(child) then EquippedTool = child end
+end)
+
+game.Players.LocalPlayer.Character.ChildRemoved:Connect(function(child)
+   if child == EquippedTool then EquippedTool = nil end
+end)
+
+-- Loop de Plantação
+task.spawn(function()
+   while true do
+      task.wait(PlantSpeed)
+      if AutoPlantEnabled and EquippedTool and SavedCFrame then
+         pcall(function()
+            local args = {
+               [1] = EquippedTool,
+               [2] = workspace:FindFirstChild("Map") and workspace.Map:FindFirstChild("Baseplate") or workspace:FindFirstChild("Baseplate"),
+               [3] = SavedCFrame
+            }
+            game:GetService("ReplicatedStorage").Remotes.PlaceItem:FireServer(unpack(args))
+         end)
+      end
+   end
+end)
+
+-- Loop de Atualização da Label
+task.spawn(function()
+   while task.wait(0.5) do
+      if not IsTotem(EquippedTool) then
+         InfoLabel:Set("❌ Equip the 'Totem'!")
+      elseif not SavedCFrame then
+         InfoLabel:Set("⚠️ Save a location!")
+      else
+         InfoLabel:Set("✅ Ready to Auto Plant")
+      end
+   end
+end)
+
+-- Aba Crates
+local Tab = Window:CreateTab("Crates", 4483362458) -- Ícone de caixa
+
+-- Toggle para Axe
+local ToggleAxe = Tab:CreateToggle({
+   Name = "Auto Axe Crate",
+   CurrentValue = false,
+   Flag = "ToggleAxe",
+   Callback = function(Value)
+      AutoAxe = Value
+      if Value then
+         AutoTotem = false -- Desliga o outro para não conflitar
+         spawn(function()
+            while AutoAxe do
+               iniciarFarm("Axe")
+               task.wait(1)
+            end
+         end)
+      end
+   end,
+})
+
+-- Toggle para Totem
+local ToggleTotem = Tab:CreateToggle({
+   Name = "Auto Totem Crate",
+   CurrentValue = false,
+   Flag = "ToggleTotem",
+   Callback = function(Value)
+      AutoTotem = Value
+      if Value then
+         AutoAxe = false -- Desliga o outro para não conflitar
+         spawn(function()
+            while AutoTotem do
+               iniciarFarm("Totem")
+               task.wait(1)
+            end
+         end)
+      end
+   end,
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- TAB AFK - ANTI KICK
+-- ═══════════════════════════════════════════════════════════════
+
+local AFKTab = Window:CreateTab("AFK", 4483362458)
+
+-- ═══════════════════════════════════════════════════════════════
+-- VARIÁVEIS DE CONTROLE AFK
+-- ═══════════════════════════════════════════════════════════════
+
+local AntiAFKEnabled = false
+local AntiAFKConnection = nil
+local VirtualUser = game:GetService("VirtualUser")
+
+-- ═══════════════════════════════════════════════════════════════
+-- FUNÇÃO ANTI-AFK
+-- ═══════════════════════════════════════════════════════════════
+
+local function enableAntiAFK()
+    -- Previne kick por inatividade
+    AntiAFKConnection = player.Idled:Connect(function() -- ← CORREÇÃO: lp → player
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end
+
+local function disableAntiAFK()
+    if AntiAFKConnection then
+        AntiAFKConnection:Disconnect()
+        AntiAFKConnection = nil
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - ANTI AFK
+-- ═══════════════════════════════════════════════════════════════
+
+AFKTab:CreateToggle({
+    Name = "Anti-AFK",
+    CurrentValue = false,
+    Flag = "AntiAFK",
+    Callback = function(value)
+        AntiAFKEnabled = value
+        
+        if value then
+            enableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Enabled",
+                Content = "You won't be kicked for inactivity!",
+                Duration = 3,
+                Image = 4483362458
+            })
+        else
+            disableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Disabled",
+                Content = "AFK protection disabled",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - AUTO JUMP
+-- ═══════════════════════════════════════════════════════════════
+
+local AutoJumpEnabled = false
+
+AFKTab:CreateToggle({
+    Name = "Auto Jump",
+    CurrentValue = false,
+    Flag = "AutoJump",
+    Callback = function(value)
+        AutoJumpEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Jump Enabled",
+                Content = "Character will jump periodically",
+                Duration = 2,
+                Image = 4483362458
+            })
+            
+            task.spawn(function()
+                while AutoJumpEnabled do
+                    local char = player.Character -- ← CORREÇÃO: lp → player
+                    if char then
+                        local humanoid = char:FindFirstChild("Humanoid")
+                        if humanoid then
+                            humanoid:ChangeState(Enum.HumanoidStateType.Jumping)
+                        end
+                    end
+                    task.wait(5)
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "Auto Jump Disabled",
+                Content = "Stopped jumping",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - AUTO SPIN
+-- ═══════════════════════════════════════════════════════════════
+
+local AutoSpinEnabled = false
+
+AFKTab:CreateToggle({
+    Name = "Auto Spin",
+    CurrentValue = false,
+    Flag = "AutoSpin",
+    Callback = function(value)
+        AutoSpinEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Spin Enabled",
+                Content = "Character will spin in place",
+                Duration = 2,
+                Image = 4483362458
+            })
+            
+            task.spawn(function()
+                while AutoSpinEnabled do
+                    local char = player.Character -- ← CORREÇÃO: lp → player
+                    if char then
+                        local hrp = char:FindFirstChild("HumanoidRootPart")
+                        if hrp then
+                            hrp.CFrame = hrp.CFrame * CFrame.Angles(0, math.rad(10), 0)
+                        end
+                    end
+                    task.wait(0.1)
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "Auto Spin Disabled",
+                Content = "Stopped spinning",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- BOTÃO - SAVE POSITION
+-- ═══════════════════════════════════════════════════════════════
+
+local SavedPosition = nil
+
+AFKTab:CreateButton({
+    Name = "Save Current Position",
+    Callback = function()
+        local char = player.Character -- ← CORREÇÃO: lp → player
+        if char then
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                SavedPosition = hrp.CFrame
+                
+                Rayfield:Notify({
+                    Title = "Position Saved",
+                    Content = "AFK position saved successfully!",
+                    Duration = 2,
+                    Image = 4483362458
+                })
+            end
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- BOTÃO - RETURN TO POSITION
+-- ═══════════════════════════════════════════════════════════════
+
+AFKTab:CreateButton({
+    Name = "Return to Saved Position",
+    Callback = function()
+        if SavedPosition then
+            local char = player.Character -- ← CORREÇÃO: lp → player
+            if char then
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    hrp.CFrame = SavedPosition
+                    
+                    Rayfield:Notify({
+                        Title = "Teleported",
+                        Content = "Returned to saved position!",
+                        Duration = 2,
+                        Image = 4483362458
+                    })
+                end
+            end
+        else
+            Rayfield:Notify({
+                Title = "No Position Saved",
+                Content = "Save a position first!",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - AUTO RETURN
+-- ═══════════════════════════════════════════════════════════════
+
+local AutoReturnEnabled = false
+
+AFKTab:CreateToggle({
+    Name = "Auto Return to Position",
+    CurrentValue = false,
+    Flag = "AutoReturn",
+    Callback = function(value)
+        AutoReturnEnabled = value
+        
+        if value then
+            if not SavedPosition then
+                Rayfield:Notify({
+                    Title = "No Position Saved",
+                    Content = "Save a position first!",
+                    Duration = 3,
+                    Image = 4483362458
+                })
+                AutoReturnEnabled = false
+                return
+            end
+            
+            Rayfield:Notify({
+                Title = "Auto Return Enabled",
+                Content = "Will return to saved position every 10s",
+                Duration = 2,
+                Image = 4483362458
+            })
+            
+            task.spawn(function()
+                while AutoReturnEnabled do
+                    if SavedPosition then
+                        local char = player.Character -- ← CORREÇÃO: lp → player
+                        if char then
+                            local hrp = char:FindFirstChild("HumanoidRootPart")
+                            if hrp then
+                                hrp.CFrame = SavedPosition
+                            end
+                        end
+                    end
+                    task.wait(10)
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "Auto Return Disabled",
+                Content = "Stopped auto-returning",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- INFORMAÇÕES AFK
+-- ═══════════════════════════════════════════════════════════════
+
+AFKTab:CreateParagraph({
+    Title = "How to use",
+    Content = "1. Enable Anti-AFK to prevent kicks\n2. Optional: Enable Auto Jump or Auto Spin\n3. Save position before going AFK\n4. Enable Auto Return to stay in one place"
+})
+
+AFKTab:CreateParagraph({
+    Title = "Features",
+    Content = "• Anti-AFK = Prevents kick\n• Auto Jump = Jumps every 5s\n• Auto Spin = Spins in place\n• Auto Return = Teleports back every 10s"
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- LOADING COMPLETE
+-- ═══════════════════════════════════════════════════════════════
+
+Rayfield:Notify({
+    Title = "YING ZOMBIE KILL LOADING", -- ← CORREÇÃO: Título corrigido
+    Content = "All features ready!",
+    Duration = 3,
+    Image = 4483362458,
+})
