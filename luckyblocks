@@ -450,3 +450,127 @@ AFKTab:CreateToggle({
         end
     end
 })
+
+--// TAB FARM
+local FarmTab = Window:CreateTab("Farm", 4483362458)
+
+--// VARIÁVEIS
+
+local AutoWateringEnabled = false
+local vim = game:GetService("VirtualInputManager")
+local lp = game:GetService("Players").LocalPlayer
+
+--// ════════════════════════════════════════════════════════════
+--// FUNÇÕES WATERING CAN (VERSÃO WORKSPACE.MUTATIONS)
+--// ════════════════════════════════════════════════════════════
+
+local function getAllWateringCans()
+    local cans = {}
+    local mutationCount = {}
+    
+    pcall(function()
+        local mutations = workspace:FindFirstChild("Mutations")
+        if not mutations then return end
+        
+        for _, mutationFolder in pairs(mutations:GetChildren()) do
+            local count = 0
+            
+            for _, obj in pairs(mutationFolder:GetChildren()) do
+                if obj.Name == "WateringCan" or obj:IsA("Model") or obj:IsA("Part") then
+                    table.insert(cans, obj)
+                    count = count + 1
+                end
+            end
+            
+            if count > 0 then
+                mutationCount[mutationFolder.Name] = count
+            end
+        end
+    end)
+    
+    return cans, mutationCount
+end
+
+local function clickAllWateringCans()
+    task.spawn(function()
+        pcall(function()
+            local cans = getAllWateringCans()
+            if #cans == 0 then return end
+            
+            for i, can in ipairs(cans) do
+                if can and can.Parent then
+                    pcall(function()
+                        local args = { [1] = can }
+                        game:GetService("ReplicatedStorage").Remotes.ClickWateringCan:FireServer(unpack(args))
+                    end)
+                    task.wait(0.05)
+                end
+            end
+        end)
+    end)
+end
+
+-- Função para simular clique na tela
+local function tocarNaTela()
+    local viewport = workspace.CurrentCamera.ViewportSize
+    local x, y = viewport.X / 2, viewport.Y / 2
+    vim:SendMouseButtonEvent(x, y, 0, true, game, 1)
+    task.wait(0.05)
+    vim:SendMouseButtonEvent(x, y, 0, false, game, 1)
+end
+
+-- Função principal do Farm
+local function iniciarFarm(caixaNome)
+    local pGui = lp:WaitForChild("PlayerGui")
+    
+    -- 1. Ativa o Prompt
+    local prompt = workspace.Crates[caixaNome].Crate:FindFirstChild("Buy")
+    if prompt and prompt:IsA("ProximityPrompt") then
+        fireproximityprompt(prompt)
+    end
+    
+    task.wait(0.7)
+
+    -- 2. Clica no Buy3
+    local buyMenu = pGui:FindFirstChild("CratePrompt")
+    if buyMenu and buyMenu.Main.Visible then
+        local btnBuy = buyMenu.Main:FindFirstChild("Buy3")
+        if btnBuy then
+            for _, c in pairs(getconnections(btnBuy.MouseButton1Click)) do c:Fire() end
+            for _, c in pairs(getconnections(btnBuy.Activated)) do c:Fire() end
+            
+            -- 3. Cliques para pular animação
+            task.wait(0.8) 
+            for i = 1, 5 do
+                tocarNaTela()
+                task.wait(0.1)
+            end
+        end
+    end
+    
+    -- 4. Devolve o HUD
+    local touchGui = pGui:FindFirstChild("TouchGui")
+    if touchGui and not touchGui.Enabled then
+        touchGui.Enabled = true
+    end
+end
+
+--// ════════════════════════════════════════════════════════════
+--// TOGGLES E BOTÕES (TODAS AS FUNÇÕES JUNTAS)
+--// ════════════════════════════════════════════════════════════
+
+FarmTab:CreateToggle({
+    Name = "Auto Feed Zombie (Recommended for VIP servers)",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoXPFarmGlobal = value
+        if value then
+            Rayfield:Notify({
+                Title = "All Brains Xp",
+                Content = "Equipping brains",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
