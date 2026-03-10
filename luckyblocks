@@ -719,3 +719,125 @@ task.spawn(function()
         end
     end
 end)
+
+
+--// TAB WALKING ZOMBIES
+local ZombiesTab = Window:CreateTab("Zombies", 4483362458)
+
+--// VARIÁVEIS
+local AttackZombiesEnabled = false
+local SavedZombiePosition = nil
+local AlreadyReturned = false -- Flag pra retornar só 1 vez
+
+--// FUNÇÃO PARA EQUIPAR AXE
+local function equipAxe()
+    local success, err = pcall(function()
+        local char = player.Character
+        if not char then return end
+        
+        local equippedAxe = char:FindFirstChild("Axe")
+        if equippedAxe then return end
+        
+        local backpack = player.Backpack
+        local axe = backpack:FindFirstChild("Axe")
+        
+        if axe then
+            local humanoid = char:FindFirstChild("Humanoid")
+            if humanoid then
+                humanoid:EquipTool(axe)
+            end
+        end
+    end)
+    
+    if not success then
+        warn("Erro ao equipar axe:", err)
+    end
+end
+
+--// TOGGLE ATTACK ALL WALKING ZOMBIES
+ZombiesTab:CreateToggle({
+    Name = "Attack All Walking Zombies",
+    CurrentValue = false,
+    Callback = function(value)
+        AttackZombiesEnabled = value
+        
+        if value then
+            local char = player.Character
+            if char then
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if hrp then
+                    SavedZombiePosition = hrp.CFrame
+                    AlreadyReturned = false -- Reseta a flag
+                end
+            end
+            
+            Rayfield:Notify({
+                Title = "Attack Zombies: ON 🧟",
+                Content = "Teleporting to zombies...",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        else
+            Rayfield:Notify({
+                Title = "Attack Zombies: OFF",
+                Content = "Stopped attacking",
+                Duration = 2,
+                Image = 4483362458,
+            })
+        end
+    end,
+})
+
+ZombiesTab:CreateParagraph({
+    Title = "Walking Zombies Info",
+    Content = "Automatically teleports to the highest numbered zombie and equips axe"
+})
+
+--// LOOP ATTACK ZOMBIES
+task.spawn(function()
+    while task.wait(0) do
+        if AttackZombiesEnabled then
+            pcall(function()
+                local char = player.Character
+                if not char then return end
+                
+                local hrp = char:FindFirstChild("HumanoidRootPart")
+                if not hrp then return end
+                
+                local zombiesFolder = workspace:FindFirstChild("WalkingZombies")
+                if not zombiesFolder then return end
+                
+                local highestZombie = nil
+                local highestNumber = -1
+                
+                for _, zombie in pairs(zombiesFolder:GetChildren()) do
+                    if zombie:IsA("Model") then
+                        local zombieNumber = tonumber(zombie.Name:match("%d+"))
+                        
+                        if zombieNumber and zombieNumber > highestNumber then
+                            highestNumber = zombieNumber
+                            highestZombie = zombie
+                        end
+                    end
+                end
+                
+                if highestZombie then
+                    -- TEM ZOMBIE: Teleporta e equipa axe
+                    local zombiePos = highestZombie:GetPivot().Position
+                    hrp.CFrame = CFrame.new(zombiePos + Vector3.new(0, 3, 0))
+                    
+                    task.wait(0.1)
+                    equipAxe()
+                    
+                    AlreadyReturned = false -- Reseta porque tem zombie
+                else
+                    -- PASTA VAZIA: Retorna APENAS 1 VEZ
+                    if SavedZombiePosition and not AlreadyReturned then
+                        hrp.CFrame = SavedZombiePosition
+                        AlreadyReturned = true -- Marca que já retornou
+                    end
+                end
+            end)
+        end
+    end
+end)
