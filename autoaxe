@@ -9,9 +9,7 @@ local Window = Rayfield:CreateWindow({
 
 local MainTab = Window:CreateTab("Autofarm", 4483362458)
 
-local AutoUpgrade = false
 local AutoTree = false
-local AutoPrestige = false
 local AutoAxeEnabled = true
 
 -- 1. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
