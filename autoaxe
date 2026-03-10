@@ -12,9 +12,9 @@ local MainTab = Window:CreateTab("Autofarm", 4483362458)
 local AutoUpgrade = false
 local AutoTree = false
 local AutoPrestige = false
-local AutoAxeEnabled = false
+local AutoAxeEnabled = true
 
--- 3. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
+-- 1. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
 MainTab:CreateToggle({
    Name = "Auto Tree + Magnet Coin",
    CurrentValue = false,
@@ -43,7 +43,7 @@ MainTab:CreateToggle({
    end,
 })
 
--- 4. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
+-- 2. AGNET 
 MainTab:CreateToggle({
     Name = "Auto Sword",
     CurrentValue = false,
