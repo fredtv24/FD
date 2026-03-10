@@ -574,3 +574,14 @@ FarmTab:CreateToggle({
         end
     end,
 })
+
+--// LOOP AUTO WATERING CAN
+task.spawn(function()
+    while true do
+        task.wait(loopDelay)
+        
+        if AutoWateringEnabled then
+            clickAllWateringCans()
+        end
+    end
+end)
