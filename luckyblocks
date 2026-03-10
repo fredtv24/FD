@@ -455,8 +455,18 @@ AFKTab:CreateToggle({
 local FarmTab = Window:CreateTab("Farm", 4483362458)
 
 --// VARIÁVEIS
-
+local AutoCollectEnabled = false
+local AutoClickEnabled = false
+local AutoAxeEnabled = false
+local AutoPlantEnabled = false
+local EquippedTool = nil
+local PlantSpeed = 0.1 
+local SavedCFrame = nil
+local AutoPrestigeEnabled = false
+local AutoXPFarmGlobal = false
 local AutoWateringEnabled = false
+local AutoAxe = false
+local AutoTotem = false
 local vim = game:GetService("VirtualInputManager")
 local lp = game:GetService("Players").LocalPlayer
 
@@ -560,6 +570,30 @@ end
 --// ════════════════════════════════════════════════════════════
 
 FarmTab:CreateToggle({
+    Name = "Auto Collect Coin",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoCollectEnabled = value
+    end,
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Click",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoClickEnabled = value
+    end,
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Sword",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoAxeEnabled = value
+    end,
+})
+
+FarmTab:CreateToggle({
     Name = "Auto Feed Zombie (Recommended for VIP servers)",
     CurrentValue = false,
     Callback = function(value)
@@ -574,6 +608,213 @@ FarmTab:CreateToggle({
         end
     end,
 })
+
+FarmTab:CreateButton({
+    Name = "Scan All Mutations",
+    Callback = function()
+        local cans, mutationCount = getAllWateringCans()
+        
+        local mutationText = ""
+        for mutationName, count in pairs(mutationCount) do
+            mutationText = mutationText .. "\n• " .. mutationName .. ": " .. count
+        end
+        
+        Rayfield:Notify({
+            Title = "Scan Full",
+            Content = "Total: " .. #cans .. " WateringCans" .. mutationText,
+            Duration = 5,
+            Image = 4483362458
+        })
+    end
+})
+
+FarmTab:CreateButton({
+    Name = "Click All  Brains Now! ",
+    Callback = function()
+        local cans = getAllWateringCans()
+        
+        Rayfield:Notify({
+            Title = "Clicking ",
+            Content = "Processando " .. #cans .. " WateringCans!",
+            Duration = 2,
+            Image = 4483362458
+        })
+        
+        clickAllWateringCans()
+    end
+})
+
+FarmTab:CreateToggle({
+    Name = "Auto Click Brains Loop",
+    CurrentValue = false,
+    Callback = function(value)
+        AutoWateringEnabled = value
+        
+        if value then
+            Rayfield:Notify({
+                Title = "Auto Click: ON ",
+                Content = "Clicking in all brains!",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+local loopDelay = 1
+
+FarmTab:CreateSlider({
+    Name = "Loop Delay (segundos)",
+    Range = {0.5, 5},
+    Increment = 0.1,
+    CurrentValue = 1,
+    Callback = function(value)
+        loopDelay = value
+    end
+})
+
+--// ════════════════════════════════════════════════════════════
+--// PARÁGRAFOS NO FINAL
+--// ════════════════════════════════════════════════════════════
+
+FarmTab:CreateParagraph({
+    Title = "━━━━━━━━━━━━━━━━━━━━━━━",
+    Content = ""
+})
+
+FarmTab:CreateParagraph({
+    Title = "💧 Watering Can System",
+    Content = "Collect all the brains from all the mutations (THIS FUNCTION WORKS MUCH BETTER ON PRIVATE SERVERS (VIP SERVERS) (THEY ARE FREE IN THIS GAME)"
+})
+
+FarmTab:CreateParagraph({
+    Title = "Auto Farm Info",
+    Content = "Auto Collect: Pulls coins\nAuto Click: Click in Brain Tank\nAuto Sword: Swings Sword\nBrains Farm: Feed your zombie with Brain\nWatering: Click in all Brains"
+})
+
+--// ════════════════════════════════════════════════════════════
+--// LOOPS
+--// ════════════════════════════════════════════════════════════
+
+--// LOOP AUTO COLLECT COIN
+task.spawn(function()
+    while true do
+        task.wait(0.1)
+        if AutoCollectEnabled then
+            pcall(function()
+                local char = player.Character
+                local torso = char and (char:FindFirstChild("Torso") or char:FindFirstChild("UpperTorso"))
+                if not torso then return end
+                
+                local orbsFolder = workspace:FindFirstChild("Orbs")
+                if orbsFolder then
+                    for _, coin in pairs(orbsFolder:GetChildren()) do
+                        if coin.Name == "Coin" then
+                            if coin:IsA("BasePart") then
+                                coin.CFrame = torso.CFrame
+                            elseif coin:IsA("Model") then
+                                coin:PivotTo(torso.CFrame)
+                            end
+                        end
+                    end
+                end
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO CLICK
+task.spawn(function()
+    while task.wait(0.2) do
+        if AutoClickEnabled then
+            pcall(function()
+                local plotsFolder = workspace:FindFirstChild("Plots")
+                local char = player.Character
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                if not plotsFolder or not hrp then return end
+                
+                local myPlot = nil
+                for _, plot in pairs(plotsFolder:GetChildren()) do
+                    local owner = plot:FindFirstChild("Owner") or plot:FindFirstChild("OwnerName")
+                    if owner and (owner.Value == player.Name or owner.Value == player) then
+                        myPlot = plot
+                        break
+                    end
+                end
+                
+                if myPlot then
+                    ReplicatedStorage.Remotes.TapButtonClick:FireServer({[1] = myPlot})
+                end
+            end)
+        end
+    end
+end)
+
+--// LOOP AUTO AXE
+task.spawn(function()
+    while task.wait(0.2) do
+        if AutoAxeEnabled then
+            pcall(function()
+                ReplicatedStorage.Remotes.AxeSwing:FireServer()
+            end)
+        end
+    end
+end)
+
+
+--// LOOP AUTO XP FARM (CLICA EM QUALQUER OBJETO DE MUTATIONS.NORMAL)
+task.spawn(function()
+    while true do
+        task.wait(0.2)
+        if AutoXPFarmGlobal then
+            pcall(function()
+                local char = player.Character
+                local hum = char and char:FindFirstChildOfClass("Humanoid")
+                local hrp = char and char:FindFirstChild("HumanoidRootPart")
+                local backpack = player:FindFirstChild("Backpack")
+                
+                if not hrp or not hum then return end
+
+                -- [1] VERIFICAR SE JÁ TEM ITEM XP EQUIPADO
+                local hasXPEquipped = false
+                for _, item in pairs(char:GetChildren()) do
+                    if item:IsA("Tool") and string.find(item.Name:upper(), "XP") then
+                        hasXPEquipped = true
+                        break
+                    end
+                end
+                
+                -- [2] EQUIPAR APENAS 1 ITEM XP (SE NÃO TIVER)
+                if not hasXPEquipped and backpack then
+                    for _, item in pairs(backpack:GetChildren()) do
+                        if item:IsA("Tool") and string.find(item.Name:upper(), "XP") then
+                            hum:EquipTool(item)
+                            task.wait(0.3)
+                            break
+                        end
+                    end
+                end
+                
+                -- [3] PEGAR QUALQUER OBJETO DE WORKSPACE.MUTATIONS.NORMAL
+                local mutations = workspace:FindFirstChild("Mutations")
+                if not mutations then return end
+                
+                local normalFolder = mutations:FindFirstChild("Normal")
+                if not normalFolder then return end
+                
+                local objects = normalFolder:GetChildren()
+                if #objects > 0 then
+                    -- Pega o PRIMEIRO objeto disponível
+                    local randomObject = objects[1]
+                    
+                    -- [4] MANDAR REMOTE
+                    local args = { [1] = randomObject }
+                    game:GetService("ReplicatedStorage").Remotes.TreeClick:InvokeServer(unpack(args))
+                end
+            end)
+        end
+    end
+end)
 
 --// LOOP AUTO WATERING CAN
 task.spawn(function()
