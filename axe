@@ -1,0 +1,52 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Tree Hub | Chop your tree V12",
+   LoadingTitle = "Frederic",
+   LoadingSubtitle = "by FREDERIC",
+   ConfigurationSaving = { Enabled = true, FolderName = "TreeHubConfig", FileName = "TreeHub" }
+})
+
+local MainTab = Window:CreateTab("Autofarm", 4483362458)
+
+local AutoTree = false
+
+
+-- 1. AUTO TREE + MAGNET COIN (DISTÂNCIA NORMAL)
+MainTab:CreateToggle({
+   Name = "Auto Tree + Magnet Coin",
+   CurrentValue = false,
+   Flag = "AutoTree",
+   Callback = function(Value)
+      AutoTree = Value
+      task.spawn(function()
+         while AutoTree do
+            pcall(function()
+               -- Bater na árvore
+               game:GetService("ReplicatedStorage").Remotes.AxeSwing:FireServer()
+               
+               -- Coletar Moedas (Magnet)
+               local char = game.Players.LocalPlayer.Character
+               if char and char:FindFirstChild("HumanoidRootPart") then
+                  for _, obj in pairs(workspace:GetDescendants()) do
+                     if obj.Name == "Coin" and obj:IsA("BasePart") then
+                        obj.CFrame = char.HumanoidRootPart.CFrame
+                     end
+                  end
+               end
+            end)
+            task.wait(0.1)
+         end
+      end)
+   end,
+})
+
+-- ANTI-AFK (IMPEDE O KICK POR INATIVIDADE)
+pcall(function()
+    local vu = game:GetService("VirtualUser")
+    game:GetService("Players").LocalPlayer.Idled:Connect(function()
+        vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+        task.wait(1)
+        vu:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+    end)
+end)
