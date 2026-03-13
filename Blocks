@@ -21,6 +21,153 @@ local Window = Rayfield:CreateWindow({
     }
 })
 
+-- ═══════════════════════════════════════════════════════════════
+
+local AFKTab = Window:CreateTab("AFK", 4483362458)
+
+-- ═══════════════════════════════════════════════════════════════
+-- VARIÁVEIS DE CONTROLE AFK
+-- ═══════════════════════════════════════════════════════════════
+
+local AntiAFKEnabled = false
+local AntiAFKConnection = nil
+local VirtualUser = game:GetService("VirtualUser")
+
+-- ═══════════════════════════════════════════════════════════════
+-- FUNÇÃO ANTI-AFK
+-- ═══════════════════════════════════════════════════════════════
+
+local function enableAntiAFK()
+    -- Previne kick por inatividade
+    AntiAFKConnection = player.Idled:Connect(function() -- ← CORREÇÃO: lp → player
+        VirtualUser:CaptureController()
+        VirtualUser:ClickButton2(Vector2.new())
+    end)
+end
+
+local function disableAntiAFK()
+    if AntiAFKConnection then
+        AntiAFKConnection:Disconnect()
+        AntiAFKConnection = nil
+    end
+end
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - ANTI AFK
+-- ═══════════════════════════════════════════════════════════════
+
+AFKTab:CreateToggle({
+    Name = "Anti-AFK",
+    CurrentValue = false,
+    Flag = "AntiAFK",
+    Callback = function(value)
+        AntiAFKEnabled = value
+        
+        if value then
+            enableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Enabled",
+                Content = "You won't be kicked for inactivity!",
+                Duration = 3,
+                Image = 4483362458
+            })
+        else
+            disableAntiAFK()
+            
+            Rayfield:Notify({
+                Title = "Anti-AFK Disabled",
+                Content = "AFK protection disabled",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- BOTÃO - SAVE POSITION
+-- ═══════════════════════════════════════════════════════════════
+
+local SavedPosition = nil
+
+AFKTab:CreateButton({
+    Name = "Save Current Position",
+    Callback = function()
+        local char = player.Character -- ← CORREÇÃO: lp → player
+        if char then
+            local hrp = char:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                SavedPosition = hrp.CFrame
+                
+                Rayfield:Notify({
+                    Title = "Position Saved",
+                    Content = "AFK position saved successfully!",
+                    Duration = 2,
+                    Image = 4483362458
+                })
+            end
+        end
+    end
+})
+
+-- ═══════════════════════════════════════════════════════════════
+-- TOGGLE - AUTO RETURN
+-- ═══════════════════════════════════════════════════════════════
+
+local AutoReturnEnabled = false
+
+AFKTab:CreateToggle({
+    Name = "Auto Return to Position",
+    CurrentValue = false,
+    Flag = "AutoReturn",
+    Callback = function(value)
+        AutoReturnEnabled = value
+        
+        if value then
+            if not SavedPosition then
+                Rayfield:Notify({
+                    Title = "No Position Saved",
+                    Content = "Save a position first!",
+                    Duration = 3,
+                    Image = 4483362458
+                })
+                AutoReturnEnabled = false
+                return
+            end
+            
+            Rayfield:Notify({
+                Title = "Auto Return Enabled",
+                Content = "Will return to saved position every 8s",
+                Duration = 2,
+                Image = 4483362458
+            })
+            
+            task.spawn(function()
+                while AutoReturnEnabled do
+                    if SavedPosition then
+                        local char = player.Character -- ← CORREÇÃO: lp → player
+                        if char then
+                            local hrp = char:FindFirstChild("HumanoidRootPart")
+                            if hrp then
+                                hrp.CFrame = SavedPosition
+                            end
+                        end
+                    end
+                    task.wait(0.08)
+                end
+            end)
+        else
+            Rayfield:Notify({
+                Title = "Auto Return Disabled",
+                Content = "Stopped auto-returning",
+                Duration = 2,
+                Image = 4483362458
+            })
+        end
+    end
+})
+
 --// TAB LUCKY BLOCKS
 local LuckyBlocksTab = Window:CreateTab("Lucky Blocks", 4483362458)
 
@@ -228,89 +375,6 @@ AFKTab:CreateToggle({
             Rayfield:Notify({
                 Title = "Anti-AFK Disabled",
                 Content = "AFK protection disabled",
-                Duration = 2,
-                Image = 4483362458
-            })
-        end
-    end
-})
-
--- ═══════════════════════════════════════════════════════════════
--- BOTÃO - SAVE POSITION
--- ═══════════════════════════════════════════════════════════════
-
-local SavedPosition = nil
-
-AFKTab:CreateButton({
-    Name = "Save Current Position",
-    Callback = function()
-        local char = player.Character -- ← CORREÇÃO: lp → player
-        if char then
-            local hrp = char:FindFirstChild("HumanoidRootPart")
-            if hrp then
-                SavedPosition = hrp.CFrame
-                
-                Rayfield:Notify({
-                    Title = "Position Saved",
-                    Content = "AFK position saved successfully!",
-                    Duration = 2,
-                    Image = 4483362458
-                })
-            end
-        end
-    end
-})
-
--- ═══════════════════════════════════════════════════════════════
--- TOGGLE - AUTO RETURN
--- ═══════════════════════════════════════════════════════════════
-
-local AutoReturnEnabled = false
-
-AFKTab:CreateToggle({
-    Name = "Auto Return to Position",
-    CurrentValue = false,
-    Flag = "AutoReturn",
-    Callback = function(value)
-        AutoReturnEnabled = value
-        
-        if value then
-            if not SavedPosition then
-                Rayfield:Notify({
-                    Title = "No Position Saved",
-                    Content = "Save a position first!",
-                    Duration = 3,
-                    Image = 4483362458
-                })
-                AutoReturnEnabled = false
-                return
-            end
-            
-            Rayfield:Notify({
-                Title = "Auto Return Enabled",
-                Content = "Will return to saved position every 8s",
-                Duration = 2,
-                Image = 4483362458
-            })
-            
-            task.spawn(function()
-                while AutoReturnEnabled do
-                    if SavedPosition then
-                        local char = player.Character -- ← CORREÇÃO: lp → player
-                        if char then
-                            local hrp = char:FindFirstChild("HumanoidRootPart")
-                            if hrp then
-                                hrp.CFrame = SavedPosition
-                            end
-                        end
-                    end
-                    task.wait(0.7)
-                end
-            end)
-        else
-            Rayfield:Notify({
-                Title = "Auto Return Disabled",
-                Content = "Stopped auto-returning",
                 Duration = 2,
                 Image = 4483362458
             })
