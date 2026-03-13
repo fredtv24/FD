@@ -154,7 +154,7 @@ AFKTab:CreateToggle({
                             end
                         end
                     end
-                    task.wait(0.08)
+                    task.wait(0.8)
                 end
             end)
         else
@@ -321,66 +321,6 @@ task.spawn(function()
         end
     end
 end)
-
--- ═══════════════════════════════════════════════════════════════
--- VARIÁVEIS DE CONTROLE AFK
--- ═══════════════════════════════════════════════════════════════
-
-local AntiAFKEnabled = false
-local AntiAFKConnection = nil
-local VirtualUser = game:GetService("VirtualUser")
-
--- ═══════════════════════════════════════════════════════════════
--- FUNÇÃO ANTI-AFK
--- ═══════════════════════════════════════════════════════════════
-
-local function enableAntiAFK()
-    -- Previne kick por inatividade
-    AntiAFKConnection = player.Idled:Connect(function() -- ← CORREÇÃO: lp → player
-        VirtualUser:CaptureController()
-        VirtualUser:ClickButton2(Vector2.new())
-    end)
-end
-
-local function disableAntiAFK()
-    if AntiAFKConnection then
-        AntiAFKConnection:Disconnect()
-        AntiAFKConnection = nil
-    end
-end
-
--- ═══════════════════════════════════════════════════════════════
--- TOGGLE - ANTI AFK
--- ═══════════════════════════════════════════════════════════════
-
-AFKTab:CreateToggle({
-    Name = "Anti-AFK",
-    CurrentValue = false,
-    Flag = "AntiAFK",
-    Callback = function(value)
-        AntiAFKEnabled = value
-        
-        if value then
-            enableAntiAFK()
-            
-            Rayfield:Notify({
-                Title = "Anti-AFK Enabled",
-                Content = "You won't be kicked for inactivity!",
-                Duration = 3,
-                Image = 4483362458
-            })
-        else
-            disableAntiAFK()
-            
-            Rayfield:Notify({
-                Title = "Anti-AFK Disabled",
-                Content = "AFK protection disabled",
-                Duration = 2,
-                Image = 4483362458
-            })
-        end
-    end
-})
 
 --// TAB FARM
 local FarmTab = Window:CreateTab("Farm", 4483362458)
@@ -717,11 +657,6 @@ ZombiesTab:CreateToggle({
             })
         end
     end,
-})
-
-ZombiesTab:CreateParagraph({
-    Title = "Walking Zombies Info",
-    Content = "Automatically teleports to the highest numbered zombie and equips axe"
 })
 
 --// LOOP ATTACK ZOMBIES
