@@ -154,7 +154,7 @@ AFKTab:CreateToggle({
                             end
                         end
                     end
-                    task.wait(9)
+                    task.wait(8)
                 end
             end)
         else
